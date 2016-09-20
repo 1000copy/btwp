@@ -1,9 +1,9 @@
 <template>
   <div class="panel" :class="cc">
-      <slot name="header"></slot>
+  <!--     <slot name="header"></slot>
       <slot name="body"></slot>
-      <slot name="footer"></slot>
-      <!-- <slot ></slot> -->
+      <slot name="footer"></slot> -->
+      <slot ></slot>
   </div>
 </template>
 
