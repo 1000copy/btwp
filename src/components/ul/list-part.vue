@@ -11,7 +11,11 @@ export default {
 	    type: {
 	      type: String,
 	      require: false
-	    }
+	    },
+      context:{
+        type:String,
+        require:false
+      }
 	},
  	data () {
       return {
@@ -21,6 +25,11 @@ export default {
           || (this.type==undefined) 
           ,
           '':this.type=='naked',
+          'list-group-item-success':this.context =="success",
+          'list-group-item-info':this.context =="info",
+          'list-group-item-danger':this.context =="danger",
+          'list-group-item-warning':this.context =="warning",
+          'list-group-item-primary':this.context =="primary"
         }
       }
     } 

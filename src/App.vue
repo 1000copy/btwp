@@ -12,15 +12,36 @@
     </panel>
     <well size="large">well</well>
     <list type="inline">
-      <lp type="naked">Item1</lp>
+      <lp type="naked" >Item1</lp>
       <lp type="vested">Item2</lp>
       <lp type="vested">Item3</lp>
     </list>
     <list type="group">
-      <lp >Item1</lp>
-      <lp >Item2</lp>
+      <lp context="success">Item1</lp>
+      <lp context="info">Item2</lp>
       <lp type="vested">Item3</lp>
     </list>
+    <breadcrumb>
+        <li><a href="#">Level 1</a></li>
+        <li><a href="#">Level 2</a></li>
+        <li class="active">Level 3</li>
+    </breadcrumb>
+    <pagination size="large">
+        <li class="disabled"><a href="#">&laquo;</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">&raquo;</a></li>
+    </pagination>
+    <pager>
+      <pager-part type="prev"><a href="#">prev</a></pager-part>
+      <pager-part type="next"><a href="#">next</a></pager-part>
+    </pager>
+    <pager>
+      <li class="previous"><a href="#">Previous</a></li>
+      <li class="next"><a href="#">Next</a></li>
+    </pager>
+
   </div>
 </template>
 
@@ -35,10 +56,14 @@ import btn from './components/btn'
 import lbl from './components/span/label'
 import list from './components/ul/list'
 import lp from './components/ul/list-part'
+import breadcrumb from './components/ul/breadcrumb'
+import pagination from './components/ul/pagination'
+import pager from './components/ul/pager'
+import pagerPart from './components/ul/pager-part'
 
 export default {
   components: {    alert,icon,btn,lbl,
-    panel,part,well,list,lp
+    panel,part,well,list,lp,breadcrumb,pagination,pager,pagerPart
 
   }
 }
