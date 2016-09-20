@@ -10,29 +10,35 @@
       <part type="body">body</part>
       <part type="footer">footer</part>
     </panel>
-
-    <div class="dropdown">
-        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Action1</a></li>
-          <li><a href="#">Action2</a></li>
-        </ul>
-      </div>
+    <well size="large">well</well>
+    <list type="inline">
+      <lp type="naked">Item1</lp>
+      <lp type="vested">Item2</lp>
+      <lp type="vested">Item3</lp>
+    </list>
+    <list type="group">
+      <lp >Item1</lp>
+      <lp >Item2</lp>
+      <lp type="vested">Item3</lp>
+    </list>
   </div>
-
 </template>
 
 <script>
 import Hello from './components/Hello'
 import alert from './components/div/alert'
 import panel from './components/div/panel'
+import well from './components/div/well'
 import part from './components/div/part'
 import icon from './components/span/icon'
 import btn from './components/btn'
 import lbl from './components/span/label'
+import list from './components/ul/list'
+import lp from './components/ul/list-part'
+
 export default {
   components: {    alert,icon,btn,lbl,
-    panel,part
+    panel,part,well,list,lp
 
   }
 }
