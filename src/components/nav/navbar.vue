@@ -1,10 +1,7 @@
 <template>
-   <div class="dropdown">
-      <a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown <b class="caret"></b></a>
-      <ul class="dropdown-menu">
-        <slot></slot>
-      </ul>
-    </div>
+	<nav class="navbar" :class="cc">
+		<slot></slot>
+	</nav>
 </template>
 
 <script>

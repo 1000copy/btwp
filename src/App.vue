@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+
     <alert type="success">success</alert>
     <icon type="home"></icon>
     <btn type="info">btn</btn>
@@ -55,6 +56,39 @@
     <btn type="info">
         <badge>42</badge>
     </btn>
+    <!-- navbar -->
+    <navbar>
+      <navbar-part type="logo" href="#logo">Logo</navbar-part>
+      <navbar-part type="nav" >
+        <li><a href="#">Link 1</a></li>
+        <li><a href="#">Link 2</a></li>
+      </navbar-part>
+      <navbar-part type="dropdown" >
+          <li><a href="#">Action1</a></li>
+          <li><a href="#">Action2</a></li>
+      </navbar-part>
+      <navbar-part type="search"></navbar-part>
+    </navbar>
+    <!-- carousel -->
+    <carousel>
+       <carousel-part type="indicators">
+            <carousel-item type="indicator" :index="0" active></carousel-item>
+            <carousel-item type="indicator" :index="1" ></carousel-item>
+            <carousel-item type="indicator" :index="2" ></carousel-item>
+        </carousel-part>
+        <!-- Wrapper for carousel items -->
+        <carousel-part type="inner">
+            <carousel-item active>
+                <img src="{{size}}" >
+            </carousel-item>
+            <carousel-item >
+                <img src="{{size}}" >
+            </carousel-item>
+            <carousel-item  >
+                <img src="{{size}}" >
+            </carousel-item>
+        </carousel-part>
+    </carousel>
   </div>
 </template>
 
@@ -65,6 +99,7 @@ import panel from './components/div/panel'
 import well from './components/div/well'
 import part from './components/div/part'
 import dropdown from './components/div/dropdown'
+import carousel from './components/div/carousel'
 import icon from './components/span/icon'
 import badge from './components/span/badge'
 import btn from './components/btn'
@@ -75,15 +110,25 @@ import breadcrumb from './components/ul/breadcrumb'
 import pagination from './components/ul/pagination'
 import pager from './components/ul/pager'
 import pagerPart from './components/ul/pager-part'
-import nv from './components/nav/nav.vue'
+import nv from './components/nav/nav'
+import navbar from './components/nav/navbar'
+import navbarPart from './components/nav/navbar-part'
+import carouselPart from './components/div/carousel-part'
+import carouselItem from './components/div/carousel-item'
+
 export default {
   components: {    
     alert,
     icon,badge,
     btn,lbl,
-    panel,part,well,list,lp,breadcrumb,pagination,pager,pagerPart,dropdown,
-    nv
+    panel,part,well,list,lp,breadcrumb,pagination,pager,pagerPart,dropdown,carousel,
+    nv,navbar,navbarPart,carouselPart,carouselItem
 
+  },
+  data(){
+     return {
+      size:'http://placehold.it/600X50'
+    }
   }
 }
 </script>
@@ -94,7 +139,7 @@ html {
 }
 
 body {
-  display: flex;
+  /*display: flex;*/
   align-items: center;
   justify-content: center;
   height: 100%;
@@ -108,13 +153,6 @@ body {
   text-align: center;
 }
 
-#app a {
-  color: #42b983;
-  text-decoration: none;
-}
 
-.logo {
-  width: 100px;
-  height: 100px
-}
+
 </style>
