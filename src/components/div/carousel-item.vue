@@ -1,6 +1,6 @@
 <template>
     <div :class="cc" class='item' v-if ="this.type == 'image'" > 
-        <slot></slot>
+          <img src="{{src}}" >
     </div>
     <li data-target="#myCarousel" data-slide-to="{{index}}" :class="cc"
         v-if ="this.type == 'indicator'" ></li>
@@ -26,6 +26,10 @@ export default {
         type: {
           type: String,
           require: true
+        },
+        src: {
+          type: String,
+          require:false
         }
     },
     data () {

@@ -78,15 +78,9 @@
         </carousel-part>
         <!-- Wrapper for carousel items -->
         <carousel-part type="inner">
-            <carousel-item active>
-                <img src="{{size}}" >
-            </carousel-item>
-            <carousel-item >
-                <img src="{{size}}" >
-            </carousel-item>
-            <carousel-item  >
-                <img src="{{size}}" >
-            </carousel-item>
+            <carousel-item  src="http://placehold.it/600X50" active></carousel-item>
+            <carousel-item  src="http://placehold.it/600X50" ></carousel-item>
+            <carousel-item  src="http://placehold.it/600X50" ></carousel-item>
         </carousel-part>
     </carousel>
   </div>
