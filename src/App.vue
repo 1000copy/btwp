@@ -20,6 +20,7 @@
       <lp context="success">Item1</lp>
       <lp context="info">Item2</lp>
       <lp type="vested">Item3</lp>
+      <li type="vested">Item4</li>
     </list>
     <breadcrumb>
         <li><a href="#">Level 1</a></li>
@@ -33,15 +34,12 @@
         <li><a href="#">3</a></li>
         <li><a href="#">&raquo;</a></li>
     </pagination>
+    <!-- why pager-part rendered is error? -->
     <pager>
-      <pager-part type="prev"><a href="#">prev</a></pager-part>
-      <pager-part type="next"><a href="#">next</a></pager-part>
+      <pager-part type="prev"><a href="#">Previous</a></pager-part>
+      <pager-part type="next"><a href="#">Next</a></pager-part>
     </pager>
-    <pager>
-      <li class="previous"><a href="#">Previous</a></li>
-      <li class="next"><a href="#">Next</a></li>
-    </pager>
-
+    
   </div>
 </template>
 

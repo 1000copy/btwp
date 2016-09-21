@@ -1,5 +1,5 @@
 <template>
- <li class="pager">
+ <li :class="cc">
    <slot></slot>
   </ul>
 </template>

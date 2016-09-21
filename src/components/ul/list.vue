@@ -7,8 +7,8 @@
 <script>
 
 export default {
-  ready () {
-    return
+  attached () {
+    // return
     if (this.type == "group"){
       // 动态改class，就是不能在UI上生效。奇怪！
       var nodes1 = this

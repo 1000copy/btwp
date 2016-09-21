@@ -1,5 +1,6 @@
 <template>
  <ul class="pager">
+
    <slot></slot>
   </ul>
 </template>
