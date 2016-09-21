@@ -38,20 +38,23 @@
       <pager-part type="prev"><a href="#">Previous</a></pager-part>
       <pager-part type="next"><a href="#">Next</a></pager-part>
     </pager>
-    <nav_ type="pill">
+    <nv type="pill">
         <li class="active"><a href="#">Home</a></li>
         <li><a href="#">Login</a></li>
         <li><a href="#">About</a></li>
-    </nav_>
-    <nav_ type="tab">
+    </nv>
+    <nv type="tab">
         <li class="active"><a href="#">Home</a></li>
         <li><a href="#">Login</a></li>
         <li><a href="#">About</a></li>
-    </nav_>
+    </nv>
     <dropdown>
         <li><a href="#">Action1</a></li>
         <li><a href="#">Action2</a></li>
     </dropdown>
+    <btn type="info">
+        <badge>42</badge>
+    </btn>
   </div>
 </template>
 
@@ -63,6 +66,7 @@ import well from './components/div/well'
 import part from './components/div/part'
 import dropdown from './components/div/dropdown'
 import icon from './components/span/icon'
+import badge from './components/span/badge'
 import btn from './components/btn'
 import lbl from './components/span/label'
 import list from './components/ul/list'
@@ -71,11 +75,14 @@ import breadcrumb from './components/ul/breadcrumb'
 import pagination from './components/ul/pagination'
 import pager from './components/ul/pager'
 import pagerPart from './components/ul/pager-part'
-import nav_ from './components/nav/nav.vue'
+import nv from './components/nav/nav.vue'
 export default {
-  components: {    alert,icon,btn,lbl,
+  components: {    
+    alert,
+    icon,badge,
+    btn,lbl,
     panel,part,well,list,lp,breadcrumb,pagination,pager,pagerPart,dropdown,
-    nav_
+    nv
 
   }
 }
