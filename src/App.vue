@@ -34,12 +34,24 @@
         <li><a href="#">3</a></li>
         <li><a href="#">&raquo;</a></li>
     </pagination>
-    <!-- why pager-part rendered is error? -->
     <pager>
       <pager-part type="prev"><a href="#">Previous</a></pager-part>
       <pager-part type="next"><a href="#">Next</a></pager-part>
     </pager>
-    
+    <nav_ type="pill">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Login</a></li>
+        <li><a href="#">About</a></li>
+    </nav_>
+    <nav_ type="tab">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Login</a></li>
+        <li><a href="#">About</a></li>
+    </nav_>
+    <dropdown>
+        <li><a href="#">Action1</a></li>
+        <li><a href="#">Action2</a></li>
+    </dropdown>
   </div>
 </template>
 
@@ -49,6 +61,7 @@ import alert from './components/div/alert'
 import panel from './components/div/panel'
 import well from './components/div/well'
 import part from './components/div/part'
+import dropdown from './components/div/dropdown'
 import icon from './components/span/icon'
 import btn from './components/btn'
 import lbl from './components/span/label'
@@ -58,10 +71,11 @@ import breadcrumb from './components/ul/breadcrumb'
 import pagination from './components/ul/pagination'
 import pager from './components/ul/pager'
 import pagerPart from './components/ul/pager-part'
-
+import nav_ from './components/nav/nav.vue'
 export default {
   components: {    alert,icon,btn,lbl,
-    panel,part,well,list,lp,breadcrumb,pagination,pager,pagerPart
+    panel,part,well,list,lp,breadcrumb,pagination,pager,pagerPart,dropdown,
+    nav_
 
   }
 }
