@@ -1,6 +1,6 @@
 <template>
     <div :class="cc" class='item' v-if ="this.type == 'image'" > 
-          <img src="{{src}}" >
+          <img :src="src" >
     </div>
     <li data-target="#myCarousel" data-slide-to="{{index}}" :class="cc"
         v-if ="this.type == 'indicator'" ></li>

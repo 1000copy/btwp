@@ -83,6 +83,9 @@
             <carousel-item  src="http://placehold.it/600X50" ></carousel-item>
         </carousel-part>
     </carousel>
+    
+    <image1 type="round" src="http://placehold.it/600X50"></image1>
+
   </div>
 </template>
 
@@ -109,6 +112,7 @@ import navbar from './components/nav/navbar'
 import navbarPart from './components/nav/navbar-part'
 import carouselPart from './components/div/carousel-part'
 import carouselItem from './components/div/carousel-item'
+import image1 from './components/image/image'
 
 export default {
   components: {    
@@ -116,7 +120,7 @@ export default {
     icon,badge,
     btn,lbl,
     panel,part,well,list,lp,breadcrumb,pagination,pager,pagerPart,dropdown,carousel,
-    nv,navbar,navbarPart,carouselPart,carouselItem
+    nv,navbar,navbarPart,carouselPart,carouselItem,image1
 
   },
   data(){
@@ -141,8 +145,8 @@ body {
 
 #app {
   color: #2c3e50;
-  margin-top: -100px;
-  max-width: 600px;
+/*  margin-top: -100px;
+*/  max-width: 600px;
   font-family: Source Sans Pro, Helvetica, sans-serif;
   text-align: center;
 }
