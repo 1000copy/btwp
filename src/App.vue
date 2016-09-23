@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-
+    <tooltip  direction="right" href="#">tooltip</tooltip>
     <alert type="success">success</alert>
     <icon type="home"></icon>
     <btn type="info">btn</btn>
@@ -83,9 +83,15 @@
             <carousel-item  src="http://placehold.it/600X50" ></carousel-item>
         </carousel-part>
     </carousel>
-    
     <image1 type="round" src="http://placehold.it/600X50"></image1>
-
+    <div>
+      <btn type="primary" data-toggle="modal" data-target="#myModal">modal</btn>
+      <modal id="myModal">
+        <span slot="title">titlespan</span>
+        <h1 slot="body">pbody</h1>
+      </modal>
+    <div>
+    
   </div>
 </template>
 
@@ -113,14 +119,16 @@ import navbarPart from './components/nav/navbar-part'
 import carouselPart from './components/div/carousel-part'
 import carouselItem from './components/div/carousel-item'
 import image1 from './components/image/image'
-
+import modal from './components/advance/modal'
+import tooltip from './components/advance/tooltip'
 export default {
   components: {    
     alert,
     icon,badge,
     btn,lbl,
     panel,part,well,list,lp,breadcrumb,pagination,pager,pagerPart,dropdown,carousel,
-    nv,navbar,navbarPart,carouselPart,carouselItem,image1
+    nv,navbar,navbarPart,carouselPart,carouselItem,image1,
+    modal,tooltip
 
   },
   data(){
