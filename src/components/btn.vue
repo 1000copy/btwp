@@ -1,6 +1,6 @@
 <template>
   <!-- <alert type="warning" closeable>text here</alert> -->
-  <button class="btn" :class="cc" >
+  <button class="btn" :class="cc">
     <slot></slot>
   </div>
 </template>
@@ -11,6 +11,10 @@ export default {
     type: {
       type: String,
       require: true
+    },
+    size: {
+      type: String,
+      require: false
     }
   },
   data () {
@@ -22,6 +26,9 @@ export default {
         'btn-warning': this.type=='warning',
         'btn-danger': this.type=='danger',
         'btn-primary': this.type=='primary',
+        'btn-lg': this.size=='large',
+        'btn-sm': this.size=='small',
+        'btn-xs': this.size=='xsmall',
       }
     }
   }

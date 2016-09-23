@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <btn type="primary" size="large">Run</btn>
+    <btn type="primary" size="small">Run</btn>
+    <btn type="primary" size="xsmall">Run</btn>
     <tooltip  direction="right" href="#">tooltip</tooltip>
     <alert type="success">success</alert>
     <icon type="home"></icon>
@@ -91,7 +94,30 @@
         <h1 slot="body">pbody</h1>
       </modal>
     <div>
-    
+    <!-- 问题不少，先放着 -->
+    <sel1 type="multi"></sel1>
+    <!-- <sel1 type="single"></sel1> -->
+    <jumbotron>
+      <h1>title</h1>
+      <p>content</p>
+      <p><btn type="primary" size="large">Run</a></p>
+    </jumbotron>
+    <frm type="horizontal">
+        <form-control label="Email" type="email"></form-control>
+        <form-control label="Password" type="password"></form-control>
+        <button type="submit"  class="btn">Login</button>
+    </frm>
+     <form class="form-horizontal"> 
+            <div>
+                <label >Email</label>
+                <input type="email" class="form-control">
+            </div>
+            <div >
+                <label >Password</label>
+                <input type="password" class="form-control">
+            </div>
+            <button type="submit"  class="btn">Login</button>
+        </form>
   </div>
 </template>
 
@@ -121,6 +147,10 @@ import carouselItem from './components/div/carousel-item'
 import image1 from './components/image/image'
 import modal from './components/advance/modal'
 import tooltip from './components/advance/tooltip'
+import sel1 from './components/advance/sel'
+import jumbotron from './components/advance/jumbotron'
+import frm from './components/advance/form'
+import formControl from './components/advance/form-control'
 export default {
   components: {    
     alert,
@@ -128,8 +158,8 @@ export default {
     btn,lbl,
     panel,part,well,list,lp,breadcrumb,pagination,pager,pagerPart,dropdown,carousel,
     nv,navbar,navbarPart,carouselPart,carouselItem,image1,
-    modal,tooltip
-
+    modal,tooltip,
+    sel1,jumbotron,frm,formControl
   },
   data(){
      return {
