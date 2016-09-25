@@ -22,7 +22,6 @@ export default {
       return {
          cc:{
             'form-vertical':this.type=='vertical',
-            'form-horizontal':this.type=='horizontal',
             'form-inline':this.type=='inline'
         }
       }

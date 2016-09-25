@@ -102,22 +102,12 @@
       <p>content</p>
       <p><btn type="primary" size="large">Run</a></p>
     </jumbotron>
-    <frm type="horizontal">
+    <frm type="inline">
         <form-control label="Email" type="email"></form-control>
         <form-control label="Password" type="password"></form-control>
-        <button type="submit"  class="btn">Login</button>
+        <btn type="primary">Login</button>
     </frm>
-     <form class="form-horizontal"> 
-            <div>
-                <label >Email</label>
-                <input type="email" class="form-control">
-            </div>
-            <div >
-                <label >Password</label>
-                <input type="password" class="form-control">
-            </div>
-            <button type="submit"  class="btn">Login</button>
-        </form>
+   
   </div>
 </template>
 
