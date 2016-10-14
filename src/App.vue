@@ -1,5 +1,25 @@
 <template>
   <div id="app">
+  <h1>基础类</h1>
+  <h2>list</h2>
+  <list-doc></list-doc>
+    <breadcrumb>
+        <li><a href="#">Level 1</a></li>
+        <li><a href="#">Level 2</a></li>
+        <li class="active">Level 3</li>
+    </breadcrumb>
+    <pagination size="large">
+        <li class="disabled"><a href="#">&laquo;</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">&raquo;</a></li>
+    </pagination>
+    <pager>
+      <pager-part type="prev"><a href="#">Previous</a></pager-part>
+      <pager-part type="next"><a href="#">Next</a></pager-part>
+    </pager>
+
     <btn type="primary" size="large">Run</btn>
     <btn type="primary" size="small">Run</btn>
     <btn type="primary" size="xsmall">Run</btn>
@@ -20,28 +40,7 @@
       <lp type="vested">Item2</lp>
       <lp type="vested">Item3</lp>
     </list>
-    <list type="group">
-      <lp context="success">Item1</lp>
-      <lp context="info">Item2</lp>
-      <lp type="vested">Item3</lp>
-      <li type="vested">Item4</li>
-    </list>
-    <breadcrumb>
-        <li><a href="#">Level 1</a></li>
-        <li><a href="#">Level 2</a></li>
-        <li class="active">Level 3</li>
-    </breadcrumb>
-    <pagination size="large">
-        <li class="disabled"><a href="#">&laquo;</a></li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">&raquo;</a></li>
-    </pagination>
-    <pager>
-      <pager-part type="prev"><a href="#">Previous</a></pager-part>
-      <pager-part type="next"><a href="#">Next</a></pager-part>
-    </pager>
+   
     <nv type="pill">
         <li class="active"><a href="#">Home</a></li>
         <li><a href="#">Login</a></li>
@@ -109,9 +108,23 @@
     </frm>
    
   </div>
+  <container>
+        <row>
+          <column  type="md-1 sm-4" style="background-color:blue">
+              left
+          </column>
+          <column  type="md-8 sm-4"  style="background-color:red">
+           middle
+          </column>
+          <column  type="md-2 sm-4" style="background-color:blue">
+            right
+          </column> 
+        </row>
+    </container>
 </template>
 
 <script>
+import listDoc from './docs/list'
 import Hello from './components/Hello'
 import alert from './components/div/alert'
 import panel from './components/div/panel'
@@ -141,15 +154,20 @@ import sel1 from './components/advance/sel'
 import jumbotron from './components/advance/jumbotron'
 import frm from './components/advance/form'
 import formControl from './components/advance/form-control'
+import container from './components/layout/container'
+import row from './components/layout/row'
+import column from './components/layout/column'
 export default {
   components: {    
+    listDoc,
     alert,
     icon,badge,
     btn,lbl,
     panel,part,well,list,lp,breadcrumb,pagination,pager,pagerPart,dropdown,carousel,
     nv,navbar,navbarPart,carouselPart,carouselItem,image1,
     modal,tooltip,
-    sel1,jumbotron,frm,formControl
+    sel1,jumbotron,frm,formControl,
+    container,row,column
   },
   data(){
      return {
@@ -171,14 +189,15 @@ body {
   height: 100%;
 }
 
-#app {
-  color: #2c3e50;
-/*  margin-top: -100px;
-*/  max-width: 600px;
-  font-family: Source Sans Pro, Helvetica, sans-serif;
-  text-align: center;
+
+code { 
+    background: hsl(220, 80%, 90%); 
 }
 
+pre {
+    white-space: pre-wrap;
+    background: hsl(30,80%,90%);
+}
 
 
 </style>
