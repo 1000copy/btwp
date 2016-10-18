@@ -1,0 +1,31 @@
+<script >
+
+class ButtonHelloElement extends HTMLButtonElement {
+  constructor() {
+    super()
+
+    this.addEventListener('click', () => {
+      alert('hello world')
+    })
+  }
+}
+
+customElements.define('button-hi', ButtonHelloElement, { extends: 'button' })
+
+document.registerElement('button-hello', {
+  prototype: Object.create(HTMLButtonElement.prototype, {
+    createdCallback: {
+      value: function createdCallback() {
+        this.innerHTML = '<button>hello world</button>'
+        this.addEventListener('click', () => {
+          alert('hello world')
+        })
+      }
+    }
+  })
+})
+</script>
+<body>
+   <button-hello></button-hello>
+   <button-hi></button-hi>
+</body>
