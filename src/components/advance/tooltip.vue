@@ -7,7 +7,7 @@
 <script>
 
 export default {
-  ready () {
+  mounted () {
     $('[data-toggle="tooltip"]').tooltip();  
   },
     props: {

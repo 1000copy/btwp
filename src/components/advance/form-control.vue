@@ -1,16 +1,13 @@
 <template>
     <div class="form-group">
         <label >{{label}}</label>
-        <input type="{{type}}" class="form-control">
+        <input :type="type" class="form-control">
     </div>
         
 </template>
 
 <script>
 export default {
-    ready () {
-
-    },
     components:{
     },
     props: {

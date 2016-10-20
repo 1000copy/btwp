@@ -1,4 +1,5 @@
 <template>
+<div>
  <h2 >group</h2>
   <p>分组是对ul标签的css改造。可以看案例：</p>
   <h4>外形</h4>
@@ -80,6 +81,7 @@
             <pager-part type="next"><a href="#">Next</a></pager-part>
           </pager>
     </xmp>
+</div>
 </template>
 <script>
   import list from '../components/ul/list'

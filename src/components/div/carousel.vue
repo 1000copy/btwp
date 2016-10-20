@@ -17,9 +17,7 @@
 
 
 export default {
-    ready () {
 
-    },
     components:{
 
     },

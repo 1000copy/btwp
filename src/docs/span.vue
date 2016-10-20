@@ -1,4 +1,5 @@
 <template>
+ <div>
  <h2>icon</h2>
   <p>icon是对span标签的css改造。可以看案例：</p>
   <h4>外形</h4>
@@ -33,7 +34,7 @@
     <xmp>
       <badge>5</badge>
     </xmp>
-   
+   </div>
 </template>
 <script>
   import icon from '../components/span/icon'

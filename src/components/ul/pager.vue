@@ -8,9 +8,6 @@
 <script>
 
 export default {
-  ready () {
-   
-  },
 	props: {
 	    type: {
 	      type: String,

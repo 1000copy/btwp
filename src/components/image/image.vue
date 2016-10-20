@@ -12,9 +12,6 @@ export default {
       require: true
     }
   },
-  ready(){
-  	// console.log(this.type,this.src)
-  },
   data () {
     // console.log(this.closeable)
     return {

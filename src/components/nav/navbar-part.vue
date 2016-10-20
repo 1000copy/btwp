@@ -1,7 +1,7 @@
 <template>
 <div>
    <!-- logo || brand -->
-   <a class="navbar-brand" href="{{href}}" v-if="this.type == 'logo'">
+   <a class="navbar-brand" :href="href" v-if="this.type == 'logo'">
      <slot></slot>
     </a>
     <!-- nav -->
@@ -28,9 +28,6 @@
 <script>
 
 export default {
-  ready () {
-   
-  },
 	props: {
 	    type: {
 	      type: String,

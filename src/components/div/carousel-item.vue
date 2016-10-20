@@ -2,7 +2,7 @@
     <div :class="cc" class='item' v-if ="this.type == 'image'" > 
           <img :src="src" >
     </div>
-    <li data-target="#myCarousel" data-slide-to="{{index}}" :class="cc"
+    <li data-target="#myCarousel" :data-slide-to="index" :class="cc"
         v-if ="this.type == 'indicator'" ></li>
             
 </template>
@@ -10,7 +10,7 @@
 <script>
 
 export default {
-    ready () {
+    mounted () {
       if (this.type == undefined || this.type =='')
         this.type = 'image'
     },

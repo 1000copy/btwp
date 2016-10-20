@@ -1,5 +1,5 @@
 <template>
-  <div class="{{cc}}">
+  <div :class="cc">
       <slot></slot>
   </div>
 </template>
