@@ -1,31 +1,34 @@
 <template>
- 
   <carousel>
-     <carousel-part type="indicators">
-          <carousel-item type="indicator" :index="0" active></carousel-item>
-          <carousel-item type="indicator" :index="1" ></carousel-item>
-          <carousel-item type="indicator" :index="2" ></carousel-item>
-      </carousel-part>
-      <!-- Wrapper for carousel items -->
-      <carousel-part type="inner">
-          <carousel-item  src="http://placehold.it/600X50" active></carousel-item>
-          <carousel-item  src="http://placehold.it/600X50" ></carousel-item>
-          <carousel-item  src="http://placehold.it/600X50" ></carousel-item>
-      </carousel-part>
+   <carousel-part-indicators >
+        <carousel-indicator type="indicator" :index="0" active></carousel-indicator>
+        <carousel-indicator type="indicator" :index="1" ></carousel-indicator>
+        <carousel-indicator type="indicator" :index="2" ></carousel-indicator>
+    </carousel-part-indicators>
+    <!-- Wrapper for carousel items -->
+    <carousel-part-inner >
+        <carousel-item  src="http://placehold.it/100X50" active></carousel-item>
+        <carousel-item  src="http://placehold.it/100X50" ></carousel-item>
+        <carousel-item  src="http://placehold.it/100X50" ></carousel-item>
+    </carousel-part-inner>
   </carousel>
-  
-
 </template>
+
 <script>
-
-
 import carousel from '../components/div/carousel'
-import carouselPart from '../components/div/carousel-part'
+import carouselPartIndicators from '../components/div/carousel-part-indicators'
+import carouselPartInner from '../components/div/carousel-part-inner'
 import carouselItem from '../components/div/carousel-item'
+import carouselIndicator from '../components/div/carousel-indicator'
 
 export default {
   components: {    
-    carousel,carouselPart,carouselItem
+    carousel,carouselPartIndicators,carouselPartInner,carouselItem,carouselIndicator
   }
 }
 </script>
+<style>
+/*carousel{
+  height:200px;
+}
+*/</style>

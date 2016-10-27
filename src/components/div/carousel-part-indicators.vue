@@ -1,10 +1,7 @@
 <template>
-    <ol :class="cc" class="carousel-indicators" v-if="this.type=='indicators'">
-       <slot></slot>
-    </ol>   
-    <div :class="cc" class='carousel-inner' v-if="this.type=='inner'"> 
-        <slot></slot>
-    </div>
+  <ol :class="cc" class="carousel-indicators">
+     <slot></slot>
+  </ol>      
 </template>
 
 <script>
@@ -13,7 +10,7 @@ export default {
     props: {
         type: {
           type: String,
-          require: true
+          require: false
         }
     },
     data () {
@@ -23,7 +20,7 @@ export default {
           // 'carousel-inner':this.type=='inner'
         }
       }
-    } 
+    }
 }
 </script>
 

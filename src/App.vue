@@ -11,6 +11,7 @@
       </row>
       <row>
         <column  type="md-4 sm-4">
+
             <panel type="info">
               <part type="header">基础类</part>
               <part type="body">
@@ -87,10 +88,11 @@ import column from './components/layout/column'
 // ul 
 import list from './components/ul/list'
 import lp from './components/ul/list-part'
-
+import caro from './components/div/caro'
 
 export default {
-  components: {    
+  components: {   
+    caro,
     listDoc,spanDoc,imageDoc,buttonDoc,formDoc,carouselDoc,navDoc,panelDoc,
  
     panel,part,list,lp,

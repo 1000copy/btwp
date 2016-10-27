@@ -1,7 +1,5 @@
 <template>
-  <div :class="cc" class='item' > 
-        <img :src="src" >
-  </div>
+    <li data-target="#myCarousel" :data-slide-to="index" :class="cc"></li>        
 </template>
 
 <script>
@@ -22,7 +20,7 @@ export default {
         },
         type: {
           type: String,
-          require: true
+          require: false
         },
         src: {
           type: String,
