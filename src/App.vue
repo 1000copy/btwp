@@ -1,5 +1,5 @@
 <template>
-    <container>
+    <container id="app">
       <row>
         <column type="md-12">
            <navbar>
@@ -16,7 +16,7 @@
               <part type="header">基础类</part>
               <part type="body">
                  <list type="group">
-                   <lp context="vested"><a href="#layout">ul</a></lp>
+                   <lp context="vested"><router-link to="/ul">ul</router-link></lp>
                    <lp context="vested"><a href="#span">span</a></lp>
                    <lp type="vested"><a href="#image">image</a></lp>
                    <lp type="vested"><a href="#button">button</a></lp>
@@ -46,23 +46,7 @@
             </panel>
         </column>
         <column  type="md-8 sm-4"  >
-           <!--  <router-view></router-view> -->
-            <h1 id="list">list</h1>
-            <list-doc ></list-doc> 
-            <h1 id="span">span</h1>      
-            <span-doc></span-doc>
-            <h1 id="image">image</h1>
-            <image-doc></image-doc>
-            <h1 id="button">button</h1>
-            <button-doc></button-doc>
-            <h1 id="form">form</h1>
-            <form-doc></form-doc>
-            <h1 id="carousel">carousel</h1>
-            <carousel-doc></carousel-doc>
-            <h1 id="nav">nav</h1>
-            <nav-doc></nav-doc>
-            <h1 id="panel">panel</h1>
-            <panel-doc></panel-doc>
+            <router-view></router-view>
         </column>
       </row>
   </container>
@@ -72,7 +56,7 @@
 import listDoc from './docs/list'
 import spanDoc from './docs/span'
 import imageDoc from './docs/image'
-import buttonDoc from './docs/button'
+// import buttonDoc from './docs/button'
 import carouselDoc from './docs/carousel'
 import formDoc from './docs/form'
 import navDoc from './docs/nav'
@@ -93,7 +77,7 @@ import caro from './components/div/caro'
 export default {
   components: {   
     caro,
-    listDoc,spanDoc,imageDoc,buttonDoc,formDoc,carouselDoc,navDoc,panelDoc,
+    listDoc,spanDoc,imageDoc,formDoc,carouselDoc,navDoc,panelDoc,
  
     panel,part,list,lp,
     navbar,navbarPart,

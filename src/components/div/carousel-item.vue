@@ -16,14 +16,14 @@ export default {
           type: Boolean,
           require: false
         },
-        index: {
-          type: Number,
-          require: true
-        },
-        type: {
-          type: String,
-          require: true
-        },
+        // index: {
+        //   type: Number,
+        //   require: true
+        // },
+        // type: {
+        //   type: String,
+        //   require: true
+        // },
         src: {
           type: String,
           require:false
