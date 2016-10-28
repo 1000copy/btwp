@@ -17,7 +17,7 @@
     <part type="body">
        <list type="group">
          <lp context="vested"><router-link to="/dropdown">dropdown</router-link></lp>
-         <lp context="vested"><router-link to="jumbotrom">jumbotrom</router-link></lp>
+         <lp context="vested"><router-link to="/jumbotrom">jumbotrom</router-link></lp>
          <lp type="vested"><router-link to="/carousel">carousel</router-link></lp>
          <lp type="vested"><router-link to="/navbar">navbar</router-link></lp>
          <lp type="vested"><router-link to="/nav">nav</router-link></lp>
