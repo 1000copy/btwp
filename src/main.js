@@ -8,6 +8,16 @@ import spanDoc from './docs/span'
 import formDoc from './docs/form'
 import buttonDoc from './docs/button'
 import imageDoc from './docs/image'
+import dropdownDoc from './docs/dropdown'
+import jumbotromDoc from './docs/jumbotrom'
+import carouselDoc from './docs/carousel'
+import navbarDoc from './docs/navbar'
+import navDoc from './docs/nav'
+import alertDoc from './docs/alert'
+// import popupDoc from './docs/popup'
+
+// import layoutDoc from './docs/layout'
+
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
@@ -22,7 +32,15 @@ const router = new VueRouter({
       { path: '/span', component: spanDoc},
       { path: '/image', component: imageDoc},
       { path: '/button', component: buttonDoc},
-      { path: '/form', component: formDoc}
+      { path: '/form', component: formDoc},
+      { path: '/dropdown', component: dropdownDoc},
+      { path: '/jumbotrom', component: jumbotromDoc},
+      { path: '/carousel', component: carouselDoc},
+      { path: '/nav', component: navDoc},
+      { path: '/alert', component: alertDoc},
+      { path: '/navbar', component: navbarDoc}
+      // { path: '/popup', component: popupDoc},
+      // { path: '/layout', component: layoutDoc}
   ]
 })
 
