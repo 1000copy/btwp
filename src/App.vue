@@ -1,5 +1,8 @@
 <template>
     <container id="app">
+    <anchored-heading :level="1">hello2</anchored-heading>
+    <anchored-heading :level="2">hello</anchored-heading>
+    <anchored-heading :level="3">hello</anchored-heading>
       <row>
         <column type="md-12">
            <navbar>
@@ -21,6 +24,7 @@
 </template>
 
 <script>
+import anchoredHeading from './components/anchor'
 import dir from './docs/dir'
 import navbar from './components/nav/navbar'
 import navbarPart from './components/nav/navbar-part'
@@ -31,6 +35,7 @@ import column from './components/layout/column'
 
 export default {
   components: {   
+    anchoredHeading,
     dir,
     navbar,navbarPart,
     container,row,column
