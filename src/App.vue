@@ -1,8 +1,8 @@
 <template>
     <container id="app">
-    <anchored-heading :level="1">hello2</anchored-heading>
+<!--     <anchored-heading :level="1">hello2</anchored-heading>
     <anchored-heading :level="2">hello</anchored-heading>
-    <anchored-heading :level="3">hello</anchored-heading>
+    <anchored-heading :level="3">hello</anchored-heading> -->
       <row>
         <column type="md-12">
            <navbar>

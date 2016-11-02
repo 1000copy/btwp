@@ -1,6 +1,6 @@
 <template>
   <!-- <alert type="warning" closeable>text here</alert> -->
-  <img class="img-circle" alt="fist">
+  <img :class="cc" alt="fist">
   </img>
 </template>
 
@@ -13,7 +13,6 @@ export default {
     }
   },
   data () {
-    // console.log(this.closeable)
     return {
       cc:{
        'img-rounded': this.type=='round' || this.type ==undefined,
@@ -26,8 +25,6 @@ export default {
 
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
 </style>
