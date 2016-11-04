@@ -14,7 +14,7 @@ import carouselDoc from './docs/carousel'
 import navbarDoc from './docs/navbar'
 import navDoc from './docs/nav'
 import alertDoc from './docs/alert'
-import carouseltest from './test/carousel-render'
+import carousel1 from './test/carousel'
 // import popupDoc from './docs/popup'
 
 // import layoutDoc from './docs/layout'
@@ -40,7 +40,7 @@ const router = new VueRouter({
       { path: '/nav', component: navDoc},
       { path: '/alert', component: alertDoc},
       { path: '/navbar', component: navbarDoc},
-      { path:'/carouseltest', component: carouseltest}
+      { path:'/carouseltest', component: carousel1}
       // { path: '/popup', component: popupDoc},
       // { path: '/layout', component: layoutDoc}
   ]
