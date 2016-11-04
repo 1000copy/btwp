@@ -4,7 +4,7 @@ var idsym = '#'+idvalue
 export default {
   render: function (createElement) {
     var urls = geturls(this.$slots.default)
-    console.log(urls)
+    // console.log(urls)
    return createElement('div',
         {
             'class':{'carousel':true, 'slide':true},

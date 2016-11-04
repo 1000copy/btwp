@@ -33,14 +33,7 @@
        </list>
     </part>
   </panel>
-  <panel type="info">
-    <part type="header">test</part>
-    <part type="body">
-       <list type="group">
-         <lp context="vested"><router-link to="/carouseltest">layout</router-link></lp>
-       </list>
-    </part>
-  </panel>
+  
 </div>
 </template>
 
