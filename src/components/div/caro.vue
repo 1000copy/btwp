@@ -2,9 +2,27 @@
 var idvalue = 'myCarousel'
 var idsym = '#'+idvalue
 export default {
+  props: {
+      indicators: {
+        type: Boolean,
+        require: false
+      },
+      controls: {
+        type: Boolean,
+        require: false
+      }
+  },
   render: function (createElement) {
     var urls = geturls(this.$slots.default)
     // console.log(urls)
+    var children = []
+    if (this.indicators) 
+       children.push(ol(createElement,urls))
+    children.push(inner(createElement,urls))
+    if (this.controls){
+      children.push(leftcontrol(createElement))
+      children.push(rightcontrol(createElement))
+    }
    return createElement('div',
         {
             'class':{'carousel':true, 'slide':true},
@@ -14,12 +32,7 @@ export default {
 
             }
         },
-        [
-          ol(createElement,urls),
-          inner(createElement,urls),
-          leftcontrol(createElement),
-          rightcontrol(createElement)
-        ]
+        children
    )      
   }
 }
