@@ -18,7 +18,7 @@
    </div>
 </template>
 <script>
-    import carousel from '../components/div/caro'
+    import {carousel} from '../components'
     export default{
         components:{
             carousel

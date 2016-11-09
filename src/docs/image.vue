@@ -22,7 +22,7 @@
 </template>
 <script>
 
-import image1 from '../components/image/image'
+import {image1} from '../components'
 
 export default {
   components: {    

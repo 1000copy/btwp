@@ -14,7 +14,7 @@
 </template>
 <script>
 
-import alert from '../components/div/alert'
+import {alert} from '../components'
 
 export default {
   components: {    

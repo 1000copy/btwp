@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import jumbotron from '../components/advance/jumbotron'
+import {jumbotron} from '../components'
 export default {
 	components: {
 		jumbotron

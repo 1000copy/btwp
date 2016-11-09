@@ -84,12 +84,7 @@
 </div>
 </template>
 <script>
-  import list from '../components/ul/list'
-  import lp from '../components/ul/list-part'
-  import breadcrumb from '../components/ul/breadcrumb'
-  import pagination from '../components/ul/pagination'
-  import pager from '../components/ul/pager'
-  import pagerPart from '../components/ul/pager-part'
+  import {list,lp,breadcrumb,pagination,pager,pagerPart} from '../components'
   export default {
     components: {    
       list,lp,breadcrumb,pagination,pager,pagerPart

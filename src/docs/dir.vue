@@ -22,6 +22,7 @@
          <lp type="vested"><router-link to="/navbar">navbar</router-link></lp>
          <lp type="vested"><router-link to="/nav">nav</router-link></lp>
          <lp type="vested"><router-link to="/alert">alert</router-link></lp>
+         <lp type="vested"><router-link to="/panel">panel</router-link></lp>
        </list>
     </part>
   </panel>
@@ -39,24 +40,11 @@
 
 <script>
 
-import panel from '../components/div/panel'
-import part from '../components/div/part'
-import navbar from '../components/nav/navbar'
-import navbarPart from '../components/nav/navbar-part'
-
-import container from '../components/layout/container'
-import row from '../components/layout/row'
-import column from '../components/layout/column'
-// ul 
-import list from '../components/ul/list'
-import lp from '../components/ul/list-part'
+import {panel,part,list,lp} from '../components'
 
 export default {
-  components: {   
-    
-    panel,part,list,lp,
-    navbar,navbarPart,
-    container,row,column
+  components: {       
+    panel,part,list,lp
   }
 }
 </script>

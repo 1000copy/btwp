@@ -36,7 +36,7 @@
 </template>
 <script>
 
-import nv from '../components/nav/nav'
+import {nv} from '../components'
 
 export default {
   components: {    

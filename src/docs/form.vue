@@ -7,8 +7,7 @@
 </template>
 <script>
 
-import frm from '../components/advance/form'
-import formControl from '../components/advance/form-control'
+import {frm,formControl} from '../components'
 
 
 export default {

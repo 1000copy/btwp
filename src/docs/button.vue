@@ -11,8 +11,8 @@
 </template>
 <script>
 
-import btn from '../components/btn'
-import badge from '../components/span/badge'
+import {btn,badge} from '../components'
+
 export default {
   components: {    
     btn,badge

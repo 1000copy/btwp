@@ -3,18 +3,9 @@ import Vue from 'vue'
 import App from './App'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
-import listDoc from './docs/list'
-import spanDoc from './docs/span'
-import formDoc from './docs/form'
-import buttonDoc from './docs/button'
-import imageDoc from './docs/image'
-import dropdownDoc from './docs/dropdown'
-import jumbotromDoc from './docs/jumbotrom'
-import carouselDoc from './docs/carousel'
-import navbarDoc from './docs/navbar'
-import navDoc from './docs/nav'
-import alertDoc from './docs/alert'
-import carousel1 from './test/carousel'
+import  {listDoc,spanDoc,formDoc,buttonDoc,imageDoc,dropdownDoc,
+  jumbotromDoc,carouselDoc,navbarDoc,navDoc,alertDoc,carousel1,panelDoc} from './docs'
+
 // import popupDoc from './docs/popup'
 
 // import layoutDoc from './docs/layout'
@@ -40,8 +31,8 @@ const router = new VueRouter({
       { path: '/nav', component: navDoc},
       { path: '/alert', component: alertDoc},
       { path: '/navbar', component: navbarDoc},
-      { path:'/carouseltest', component: carousel1}
-      // { path: '/popup', component: popupDoc},
+      { path:'/carouseltest', component: carousel1},
+      { path: '/panel', component: panelDoc},
       // { path: '/layout', component: layoutDoc}
   ]
 })
