@@ -4,7 +4,8 @@ import App from './App'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
 import  {listDoc,spanDoc,formDoc,buttonDoc,imageDoc,dropdownDoc,
-  jumbotromDoc,carouselDoc,navbarDoc,navDoc,alertDoc,carousel1,panelDoc} from './docs'
+  jumbotromDoc,carouselDoc,navbarDoc,navDoc,alertDoc,carousel1,
+  panelDoc,wellDoc,tooltipDoc,modalDoc,selectionDoc} from './docs'
 
 // import popupDoc from './docs/popup'
 
@@ -32,7 +33,10 @@ const router = new VueRouter({
       { path: '/alert', component: alertDoc},
       { path: '/navbar', component: navbarDoc},
       { path:'/carouseltest', component: carousel1},
-      { path: '/panel', component: panelDoc},
+      { path: '/selection', component: selectionDoc},
+      { path: '/well', component: wellDoc},
+      { path: '/tooltip', component: tooltipDoc},
+      { path: '/modal', component: modalDoc},
       // { path: '/layout', component: layoutDoc}
   ]
 })
