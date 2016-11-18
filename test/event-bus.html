@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/vue/1.0.28/vue.min.js"></script>
+  </head>
+<body>
+  <div id="todo-app">
+      <h1>todo app</h1>
+      <new-todo></new-todo>
+      <todo-list></todo-list>
+  <div>
+  <script>
+  var eventHub =new Vue( {
+    data(){
+      return{
+        todos:['A','B','C']
+      }
+    },
+    created: function () {
+      this.$on('add-todo', this.addTodo)
+      this.$on('delete-todo', this.deleteTodo)
+    },
+    // It's good to clean up event listeners before
+    // a component is destroyed.
+    beforeDestroy: function () {
+      this.$off('add-todo', this.addTodo)
+      this.$off('delete-todo', this.deleteTodo)
+    },
+    methods: {
+      addTodo: function (newTodo) {
+        this.todos.push(newTodo)
+      },
+      deleteTodo: function (i) {
+        this.todos.splice(i,1)
+      }
+    }
+  })
+  var newTodo = {
+        template:'<div><input type="text" autofocus v-model="newtodo"/><button @click="add">add</button></div>',
+        data(){
+          return{
+            newtodo:''
+          }
+        }, 
+        methods:{
+          add:function(){
+            eventHub.$emit('add-todo', this.newtodo)
+            this.newtodo = ''
+          }
+      }
+  }
+  var todoList = {
+      template:'<ul> \
+        <li v-for="(index,item) in items">{{item}} \
+          <button @click="rm(index)">X</button></li> \
+        </ul>',
+      data(){
+        return{
+          items:eventHub.todos
+        }
+      },
+      methods:{
+       rm:function(i){
+          eventHub.$emit('delete-todo', i)
+        }
+      }
+  }
+  var app= new Vue({
+    el:'#todo-app',
+    components:{
+      newTodo:newTodo,
+      todoList:todoList
+    },
+    events: {
+      'newtodo': function (newtodo) {
+        this.$broadcast('newtodo',newtodo)
+      }
+    }
+  })
+  </script>
+</body>
+</html>
