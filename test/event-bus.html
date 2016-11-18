@@ -16,14 +16,14 @@
       }
     },
     created: function () {
-      this.$on('add-todo', this.addTodo)
-      this.$on('delete-todo', this.deleteTodo)
+      this.$on('add', this.addTodo)
+      this.$on('delete', this.deleteTodo)
     },
     // It's good to clean up event listeners before
     // a component is destroyed.
     beforeDestroy: function () {
-      this.$off('add-todo', this.addTodo)
-      this.$off('delete-todo', this.deleteTodo)
+      this.$off('add', this.addTodo)
+      this.$off('delete', this.deleteTodo)
     },
     methods: {
       addTodo: function (newTodo) {
@@ -43,7 +43,7 @@
         }, 
         methods:{
           add:function(){
-            eventHub.$emit('add-todo', this.newtodo)
+            eventHub.$emit('add', this.newtodo)
             this.newtodo = ''
           }
       }
@@ -60,7 +60,7 @@
       },
       methods:{
        rm:function(i){
-          eventHub.$emit('delete-todo', i)
+          eventHub.$emit('delete', i)
         }
       }
   }
