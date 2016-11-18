@@ -2,7 +2,7 @@
 <div>
   <h2>案例</h2>
   <well size="large">well</well>
-  <h2>代码</h2>
+  <h2>代码{{test}}</h2>
   <xmp>
     &lt;well size="large">well&lt;/well>
   </xmp>
@@ -19,8 +19,30 @@
 import {well} from '../components'
 
 export default {
+  mounted(){
+    var t = this
+    setTimeout(function(){
+      // t.test = 'abcccc'
+
+    },1000)
+    $.ajax({
+    'url' : '/api',
+    'type' : 'GET',
+    'data' : {
+      'paramater1' : 'value',
+      'parameter2' : 'another value'
+    },
+    'success' : function(data) {
+      t.test = data
+    }
+  });
+  },
   components: {    
     well
-  }
+  },
+  data(){
+    return{test:'cdd'}
+  },
+
 }
 </script>

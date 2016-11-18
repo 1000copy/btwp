@@ -20,7 +20,7 @@ const router = new VueRouter({
   routes :[
       { path: '/home', component: Home },
       { path: '/about', component: About },
-      { path: '/', redirect: '/ul' },
+      // { path: '/', redirect: '/ul' },
       { path: '/ul', component: listDoc},
       { path: '/span', component: spanDoc},
       { path: '/image', component: imageDoc},

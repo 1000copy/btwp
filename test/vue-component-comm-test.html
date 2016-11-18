@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/vue/1.0.28/vue.min.js"></script>
+  </head>
+<body>
+  <div id="todo-app">
+      <h1>todo app</h1>
+      <new-todo></new-todo>
+      <todo-list></todo-list>
+  <div>
+  <script>
+  var newTodo = {
+        template:'<div><input type="text" autofocus v-model="newtodo"/><button @click="add">add</button></div>',
+        data(){
+          return{
+            newtodo:''
+          }
+        }, 
+        methods:{
+          add:function(){
+            this.$dispatch('newtodo',this.newtodo)
+            this.newtodo = ''
+          }
+      }
+  }
+  var todoList = {
+      template:'<ul> \
+        <li v-for="(index,item) in items">{{item}} \
+          <button @click="rm(index)">X</button></li> \
+        </ul>',
+      data(){
+        return{
+          items:['item 1','item 2','item 3'],
+        }
+      },
+      methods:{
+       rm:function(i){
+          this.items.splice(i,1)
+        }
+      },
+      events: {
+        'newtodo': function (newtodo) {
+          this.items.push(newtodo)
+        }
+      },
+  }
+  var app= new Vue({
+    el:'#todo-app',
+    components:{
+      newTodo:newTodo,
+      todoList:todoList
+    },
+    events: {
+      'newtodo': function (newtodo) {
+        this.$broadcast('newtodo',newtodo)
+      }
+    }
+  })
+  </script>
+</body>
+</html>

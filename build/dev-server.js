@@ -42,6 +42,9 @@ Object.keys(proxyTable).forEach(function (context) {
   app.use(proxyMiddleware(context, options))
 })
 
+app.get('/api', function (req, res) {
+  res.send('api verion 0.01');
+});
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())
 
