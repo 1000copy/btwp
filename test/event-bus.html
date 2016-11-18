@@ -8,6 +8,7 @@
       <new-todo></new-todo>
       <todo-list></todo-list>
   <div>
+  
   <script>
   var eventHub =new Vue( {
     data(){
@@ -69,11 +70,6 @@
     components:{
       newTodo:newTodo,
       todoList:todoList
-    },
-    events: {
-      'newtodo': function (newtodo) {
-        this.$broadcast('newtodo',newtodo)
-      }
     }
   })
   </script>
