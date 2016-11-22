@@ -25,5 +25,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  background-color:red;
+  border:3px solid;
 </style>
