@@ -15,8 +15,7 @@ Vue是一个专注于前端UI的框架。它的主要能力是：
         <button @click="inc">+</button>
     </div>
     <script>
-    new Vue({
-      el:'#app',
+    var app = new Vue({
       data () {
         return {count: 0}
       },
@@ -24,6 +23,7 @@ Vue是一个专注于前端UI的框架。它的主要能力是：
         inc () {this.count++}
       }
     })
+    app.$mount('#app')
     </script>
     
 你可以实际的操作，看到按钮和数字的互动变化。然后我们来看Vue如何做到的。
@@ -33,17 +33,26 @@ Vue是一个专注于前端UI的框架。它的主要能力是：
 
     从该标签所在的Vue实例内的data函数返回的对象内查找名为‘key’的项目值，把这个值拿来填充{{key}}所占据的位置的内容。
 
-具体到本案例，在创建Vue实例的时候，
-
-    new Vue({
-          el:'#app',
-          ...
-          
-Vue通过el成员的值#app，关联到div#app上。而{{count}}最终定位得到返回对象，{count: 0}，从而得到值0，并使用0填充到<span>标签的内容上。这就是<span>{{count}}</span>的填充过程。
+具体到本案例，Vue实例内包含了data和methods。从而{{count}}最终定位得到返回对象，{count: 0}，从而得到值0，并使用0填充到<span>标签的内容上。这就是<span>{{count}}</span>的填充过程。
 
 而@click表示的含义是：
 
   把button的onclick事件挂接到对应Vue实例的methods对象内的指定方法上。这里就是inc()方法。
+
+
+          
+Vue实例通过调用$mount方法，把JavaScript内的数据和方法和HTML内对应的标签块关联起来。当然，可以不使用$mount方法，而是采用：
+
+ new Vue({
+          el:'#app',
+          ...
+
+通过el成员的值#app，关联到div#app上。两者是等同的。但是我更喜欢$mount，因为它认为：
+
+1. Vue实例自身的内容
+2. 它对HTML的关联
+
+是两回事。分开看会更好。
 
 真正神奇的地方来了，这就是Vue的响应式编程特性。我们看到inc()方法内只是修改了this.count这个数字，UI上的<span>内容就会变化呢？我们本来以为的流程应该是：“我们首先修改this.count,然后拿这个修改过的值通过DOM API去更新<span>”。然而{{count}}这样的数据绑定，不仅仅意味着把this.count的值显示出来，也意味着当this.count被修改的时候，<span>的内容会跟着更新。这就是响应式编程，具体的魔法由Vue内部完成。开发者只要通过{{}}形式的声明，告诉Vue说，“我的这块内容应该显示Vue实例内的某个数据，并且当Vue实例数据更新时，这里的显示也要更新”即可。
 
@@ -73,7 +82,7 @@ Vue实例还做的另外一件事，是托管了data()返回的数据对象。�
 
     <span v-text="count"></span>
 
-更多指令我会在后文继续提及。
+更多指令我会在后续文章中继续提及。
 
 在新的vue版本中组件被认为更好的复用代码和分离关注点的方式。接下来，我们使用同样的案例，讲解组件。我们可以看到HTML代码：
 
@@ -105,13 +114,12 @@ Vue实例还做的另外一件事，是托管了data()返回的数据对象。�
               }
         }
       
-    new Vue({
-      el:'#app',
+    var app = new Vue({
       components:{
         counter : counter
        }}
     )
-    
+    app.$mount('#app')
     </script>
 
 这一次，我们见到了新的内容:
@@ -139,4 +147,10 @@ Vue实例还做的另外一件事，是托管了data()返回的数据对象。�
 2. vue.js的起步
 
 暂时不在讨论之列。
+
+
+
+
+
+
 
