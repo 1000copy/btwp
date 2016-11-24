@@ -7,7 +7,13 @@ Vue是一个专注于前端UI的框架。它的主要能力是：
 
 ![clipboard.png](/img/bVFTaM)
 
-有一个标签显示数字0，当点击按钮“+”，数字会每次加1。代码如下。你可以直接保存代码到html文件中，然后用浏览器打开，如果是IE的话必须是IE8或者或以上版本：
+有一个标签显示数字0，当点击按钮“+”，数字会每次加1。
+
+我们会一个案例多种写法，包括Vue实例方案、组件方案。组件方案内还包括了一般组件和Render函数组件。
+
+##Vue实例
+
+代码如下。你可以直接保存代码到html文件中，然后用浏览器打开，如果是IE的话必须是IE8或者或以上版本：
 
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <div id="app">
@@ -84,6 +90,8 @@ Vue实例还做的另外一件事，是托管了data()返回的数据对象。�
 
 更多指令我会在后续文章中继续提及。
 
+##组件
+
 在新的vue版本中组件被认为更好的复用代码和分离关注点的方式。接下来，我们使用同样的案例，讲解组件。我们可以看到HTML代码：
 
     <div id="app">
@@ -136,7 +144,42 @@ Vue实例还做的另外一件事，是托管了data()返回的数据对象。�
 1. 你得小心的在外层使用单引号，在内部使用双引号
 2. 混杂js和html观感不佳
 
-此时，可以使用的替代方法：
+###模板分离式的组件
+
+可以使用脚本模板把HTML从代码中分离出来：
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script type="x-template" id="t">
+        <div>
+          <span>{{count}}</span>
+          <button v-on:click="inc">+</button>
+        </div>
+    </script>
+    
+    <div id="app">
+      <counter></counter>
+    </div>
+    <script>
+    var counter = {
+              'template':'#t',
+             data () {
+                return {count: 0}
+              },
+              methods: {
+                inc () {this.count++}
+              }
+        }
+      
+    var app = new Vue({
+      components:{
+        counter : counter
+       }}
+    )
+    app.$mount('#app')
+    </script>
+模板x-template使用标签script，因为这个类型是浏览器无法识别的，因此浏览器只是简单的放在DOM节点上，你可以同一般的getElementById方法获得此节点，把它作为HTML片段使用。
+
+另外可以使用的替代方法：
 1. render函数。实际上所有的template字符串本来在内部就被编译为render函数的
 2. 单文件组件技术
 3. 或者vue支持的JSX。
@@ -148,9 +191,55 @@ Vue实例还做的另外一件事，是托管了data()返回的数据对象。�
 
 暂时不在讨论之列。
 
+### Render函数式组件
 
+Render函数可以充分利用JavaScript语言在创建HTML模板方面的灵活性。实际上，组件的HTML模板最终都会转换为Render函数类型。我们在“vue.js - 高级 - render函数”中有提及它。对于同一的需求，使用Render函数的代码如下：
 
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <div id="app">
+      <counter></counter>
+    </div>
+    <script>
+        var a = {
+               data () {
+                  return {count: 1}
+                },
+                methods: {
+                  inc () {this.count++}
+                },
+                render:function(h){
+                  // var self = this;
+                  var buttonAttrs = {
+                      on: { click: this.inc },
+                      domProps: {
+                          innerHTML: '+'
+                      },
+                  };
+                  var spanAttrs = {
+                      on: { click: this.inc },
+                      domProps: {
+                          innerHTML: this.count.toString()
+                      },
+                  };
+                  var span = h('span', spanAttrs, []);
+                  var button = h('button', buttonAttrs, []);
+                  return h('div' 
+                    ,{},
+                    [
+                      span,
+                      button
+                    ])
+    
+                 }
+          }
+    
+      new Vue({
+        el:'#app',
+        components:{
+          counter : a
+         }}
+      )
+    
+    </script>
 
-
-
-
+函数render的参数h，其实是一个名为createElement 的函数，可以用来创建元素。此函数的具体说明，请参考官方手册即可。
