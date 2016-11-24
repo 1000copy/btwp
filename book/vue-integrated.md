@@ -9,7 +9,7 @@ Vue是一个专注于前端UI的框架。它的主要能力是：
 
 有一个标签显示数字0，当点击按钮“+”，数字会每次加1。
 
-我们会一个案例多种写法，包括Vue实例方案、组件方案。组件方案内还包括了一般组件和Render函数组件。
+我们会一个案例多种写法，包括Vue实例方案、组件方案。
 
 ##Vue实例
 
@@ -33,32 +33,36 @@ Vue是一个专注于前端UI的框架。它的主要能力是：
     </script>
     
 你可以实际的操作，看到按钮和数字的互动变化。然后我们来看Vue如何做到的。
-首先，必须引入Vue.js库。我们使用<script>，像是任何古老的js库或者框架的引入一样，引入Vue.js。为了方便，我们没有下载vue.js ,而是使用了vue.js的一个网上提供的拷贝。此拷贝由http://unpkg.com/提供。接下来的代码分为HTML标签和放置于<script>内的js代码。
+首先，必须引入Vue.js库。我们使用<script>，像是任何古老的js库或者框架的引入一样，引入Vue.js。为了方便，我们没有下载vue.js ,而是使用了vue.js的一个网上提供的拷贝。此拷贝由[unpkg](http://unpkg.com/)提供。接下来的代码分为HTML标签和放置于<script>内的js代码。
 
 随后我们看HTML。它就是有一个div标签内嵌套button和span标签，看起来和普通HTML别无二致。除了{{count}}、和@click属性之外。形如{{key}}的符号，是一种特殊的记号，表示的含义是：
 
     从该标签所在的Vue实例内的data函数返回的对象内查找名为‘key’的项目值，把这个值拿来填充{{key}}所占据的位置的内容。
 
-具体到本案例，Vue实例内包含了data和methods。从而{{count}}最终定位得到返回对象，{count: 0}，从而得到值0，并使用0填充到<span>标签的内容上。这就是<span>{{count}}</span>的填充过程。
+具体到本案例，Vue实例内包含了data和methods。从而{{count}}最终定位得到返回对象，{count: 0}，从而得到值0，并使用0填充到`<span>`标签的内容上。这就是`<span>{{count}}</span>`的填充过程。
 
 而@click表示的含义是：
 
   把button的onclick事件挂接到对应Vue实例的methods对象内的指定方法上。这里就是inc()方法。
 
+我们已经多次提到了Vue实例，每个Vue.js应用都是通过构造函数Vue创建一个Vue的根实例启动的。形如：
 
+  var vm = new Vue(option)
           
-Vue实例通过调用$mount方法，把JavaScript内的数据和方法和HTML内对应的标签块关联起来。当然，可以不使用$mount方法，而是采用：
+参数option是一个对象。我们在此案例看到它有一个data函数成员和一个methods成员。其实它还可以包含模板、挂载元素、方法、生命周期钩子。
+
+此案例中，我会通过$mount方法把Vue实例和HTML内对应的标签块关联起来。当然，可以不使用$mount方法，而是采用`挂接元素`来指定，两者是等效的：
 
  new Vue({
           el:'#app',
           ...
 
-通过el成员的值#app，关联到div#app上。两者是等同的。但是我更喜欢$mount，因为它认为：
+但是我更喜欢$mount，因为它可以把：
 
 1. Vue实例自身的内容
 2. 它对HTML的关联
 
-是两回事。分开看会更好。
+分成两件事。分开看会更好。
 
 真正神奇的地方来了，这就是Vue的响应式编程特性。我们看到inc()方法内只是修改了this.count这个数字，UI上的<span>内容就会变化呢？我们本来以为的流程应该是：“我们首先修改this.count,然后拿这个修改过的值通过DOM API去更新<span>”。然而{{count}}这样的数据绑定，不仅仅意味着把this.count的值显示出来，也意味着当this.count被修改的时候，<span>的内容会跟着更新。这就是响应式编程，具体的魔法由Vue内部完成。开发者只要通过{{}}形式的声明，告诉Vue说，“我的这块内容应该显示Vue实例内的某个数据，并且当Vue实例数据更新时，这里的显示也要更新”即可。
 
@@ -144,9 +148,9 @@ Vue实例还做的另外一件事，是托管了data()返回的数据对象。�
 1. 你得小心的在外层使用单引号，在内部使用双引号
 2. 混杂js和html观感不佳
 
-###模板分离式的组件
+###模板分离的方式
 
-可以使用脚本模板把HTML从代码中分离出来：
+模板内的HTML，可以由多种方式从代码中分离出来，以便增加可读性。第一种方式采用x-template:
 
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script type="x-template" id="t">
@@ -177,7 +181,71 @@ Vue实例还做的另外一件事，是托管了data()返回的数据对象。�
     )
     app.$mount('#app')
     </script>
+
 模板x-template使用标签script，因为这个类型是浏览器无法识别的，因此浏览器只是简单的放在DOM节点上，你可以同一般的getElementById方法获得此节点，把它作为HTML片段使用。
+
+或者使用在HTML5引入的新标签template，看起来更干净些：
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <template id="t">
+        <div>
+          <span>{{count}}</span>
+          <button v-on:click="inc">+</button>
+        </div>
+    </template>
+    
+    <div id="app">
+      <counter></counter>
+    </div>
+    <script>
+    var counter = {
+              'template':'#t',
+             data () {
+                return {count: 0}
+              },
+              methods: {
+                inc () {this.count++}
+              }
+        }
+      
+    var app = new Vue({
+      components:{
+        counter : counter
+       }}
+    )
+    app.$mount('#app')
+    </script>
+
+或者如果组件内容并不需要做`分发`的话，可以通过inline-template标记它的内容，把它当作模板：
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <div id="app">
+      <counter  inline-template>
+        <div>
+          <span>{{count}}</span>
+          <button v-on:click="inc">+</button> 
+        </div>
+      </counter>
+    </div>
+    <script>
+    var counter = {
+             data () {
+                return {count: 0}
+              },
+              methods: {
+                inc () {this.count++}
+              }
+        }
+      
+    var app = new Vue({
+      components:{
+        counter : counter
+       }}
+    )
+    app.$mount('#app')
+    </script>
+
+模板是组件的一部分，它应该是和组件的其他定义内聚在一起。所以，应该尽量避免使用这两种模板方案，除非这是一个小应用或者演示程序代码。
 
 另外可以使用的替代方法：
 1. render函数。实际上所有的template字符串本来在内部就被编译为render函数的
