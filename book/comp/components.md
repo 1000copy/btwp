@@ -80,3 +80,38 @@ vue.js引入的组件让分解单一HTML到独立组件成为可能。组件可�
     })
     </script>
 
+###引用子组件
+
+一个父组件内常常有多个子组件，有时候需要引用子组件以便个别处理。Vue可以通过指令ref设置组件的标识符，并在代码内通过实例提供的$refs来引用特定组件。假设一个案例有三个按钮，两按钮被点击1次就会为自己的计数器加一，另外一个按钮可以取得前面两个按钮的值，并加总后设置{{total}}的值。代码如下：
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <div id="app">
+      {{ total }}
+      <count ref="b1"></count>
+      <count ref="b2"></count> 
+      <button v-on:click="value">value</button>
+    </div>
+    <script>
+     Vue.component('count', {
+      template: '<button v-on:click="inc">{{ count }}</button>',
+      data: function () {
+        return {count: 0}
+      },
+      methods: {
+        inc: function () {
+          this.count+= 1
+        }
+      },
+    })
+    new Vue({
+      el: '#app',
+      data: {total:0},
+      methods: {
+        value: function () {
+          this.total = this.$refs.b1.count+this.$refs.b2.count
+        }
+      }
+    })
+    </script>
+
+标签button使用ref设置两个按钮分为为b1、b2，随后在父组件代码内通过$refs引用它们。
