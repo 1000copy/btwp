@@ -184,17 +184,3 @@ Build a Simple Todo App with Vue.js and Vuex 2.0
 Vue components communication http://stackoverflow.com/questions/34509103/vue-components-communication
 关于父子通讯，这里写的很好：https://vuejs.org/v2/guide/migration.html#dispatch-and-broadcast-replaced
 
-作者：刘传君
-
-
-创建过产品，创过业。好读书，求甚解。
-可以通过 1000copy#gmail.com 联系到我
-
-
-## 出品
-bootstrap小书 https://www.gitbook.com/book/1000copy/bootstrap/details
-http小书 http://www.ituring.com.cn/book/1791
-Git小书  http://www.ituring.com.cn/book/1870
-
-
-
