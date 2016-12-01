@@ -39,7 +39,7 @@ vue拥有了绑定，从而和以往的native js，jquery有了重要的区别�
 1. 这个value需要从对应Vue实例中的data函数返回的对象内查找value，并填充此值
 2. 我使用了一个定时器，每秒钟去修改一次value数据成员，我会发现DOM的标签会跟着value的变化而变化
 
-绑定包括数据绑定，事件绑定。其中的数据绑定又有细分。我会一个个的展示它们出来。
+绑定包括数据绑定、事件绑定、元素绑定。其中的数据绑定又有细分。我会一个个的展示它们出来。
 
 ##数据绑定
 
@@ -212,6 +212,309 @@ v-bind针对class可以直接传入一个数组作为属性的值：
     })
   </script> 
 
-###应用：绑定表单控件
-###简写方法
 ##事件绑定
+
+指令v-on可以监听DOM事件。如下案例，可以显示一个按钮，点击此按钮会在控制台打印"BUTTON"：
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <div id="app">
+      <button v-on:click="who">who</button>
+    </div>
+    <script>
+      var a= new Vue({
+        el: '#app',
+        methods: {
+          who: function (event) {
+            console.log(event.target.tagName)
+          }    
+        }
+      })
+    </script> 
+
+指令v-on会把参数（click）指定的事件挂接到属性值（who）指定的方法上。方法who的参数event为原生的JavaScript事件对象。
+
+指令v-on可以使用修饰符。可以选这些修饰符
+
+  .stop
+  .prevent
+  .capture
+  .self
+
+还有一类特别的修饰符，专门用于键盘事件，类似
+
+  .keyup.enter
+
+表示侦听enter键的keyup事件。还有更多：
+
+  .enter
+  .tab
+  .delete
+  .esc
+  .space
+  .up
+  .down
+  .left
+  .right
+
+也可以在keyup修饰符后跟着一个数字表示键盘的ASCII码：
+
+  .13 等同于.enter
+
+
+###应用：绑定表单控件
+
+绑定表单控件和绑定普通控件并无二致。但是因为控件绑定常常涉及到双向绑定，此时使用v-model让它更加简单。比如checkbox：
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <div id="app">
+      <input type="checkbox" v-bind:checked="checked">v-bind</input><br/>
+      <label>{{ checked }}</label>
+    </div>
+    <script>
+      var a= new Vue({
+        el: '#app',
+        data(){
+          return {checked : true} 
+        }
+      }
+    )
+    </script> 
+
+把checked数据绑定到input的checked属性上。然而，这样的绑定都是单向的，就是说：
+
+1. 如果checked数据修改了，那么DOM属性就会修改
+2. 如果DOM属性修改了，checked数据并不会修改
+
+所以，当我们点击界面上的输入控件时，尽管此控件会打钩或者去掉打钩，但是label的文字并不会更新。
+
+之前有的.sync修饰符本来可以做双向绑定，但是此特性在vue2.0中已经被删除，所以如果想要使用v-bind做到双向绑定的话，可以加入事件来监视变化，并更新checked数据即可：
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <div id="app">
+      <input type="checkbox" ref="c2"v-bind:checked="checked" @change="change">v-bind</input><br/>
+    <label for="checkbox">{{ checked }}</label>
+    </div>
+    <script>
+      var a= new Vue({
+        el: '#app',
+        data(){
+          return {checked : true} 
+        },
+        methods:{
+          change(){
+            this.checked = this.$refs.c2.checked
+          }
+        }
+      }
+    )
+    </script> 
+
+
+这样做也太麻烦了，鉴于双向绑定也比较常用的，因此vue引入了一个指令v-model,可以使用它简化此工作：
+
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <div id="app">
+      <input type="checkbox" v-model="checked">v-model</input><br/>
+      <label for="checkbox">{{ checked }}</label>
+    </div>
+    <script>
+      var a= new Vue({
+          el: '#app',
+          data(){return {checked : true} }
+        }
+      )
+    </script> 
+
+可以用v-model指令在控件上创建双向数据绑定。正如我们已经看到的v-model是v-bind和v-on的语法糖，但是确实很甜。
+
+
+####表单控件：text
+
+
+  <input type="text" v-model="message">
+
+
+####表单控件：checkbox
+
+在单个checkbox的情况下：
+
+  <input type="checkbox" v-model="checked">
+
+此checkbox会和数据项checked形成双向绑定。
+
+在多个checkbox的情况下：
+
+  <input type="checkbox" value="1" v-model="checks">
+  <input type="checkbox" value="2" v-model="checks">
+  <input type="checkbox" value="3" v-model="checks">
+
+会和checks形成双向绑定。checks是一个数组，案例：
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <div id="app">
+        <input type="checkbox" value="1" v-model="checks">
+        <input type="checkbox" value="2" v-model="checks">
+        <input type="checkbox" value="3" v-model="checks">
+        <label for="checkbox">{{ checks }}</label>
+    </div>
+    <script>
+      var a= new Vue({
+          el: '#app',
+          data(){return {checks :[ "1", "2" ]} }
+        }
+      )
+    </script> 
+
+你可以测试下，选择checkbox，看checks的变化，，全选的情况下，checks =[ "1", "2", "3" ]。
+
+
+###表单控件radio
+
+此控件可以成组使用，组内互斥选择，最后只能选择一项目：
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <div id="app">
+       <input type="radio" value="1" v-model="which">
+       <input type="radio" value="2" v-model="which">
+       <span>{{ which }}</span>
+    </div>
+    <script>
+      var a= new Vue({
+          el: '#app',
+          data(){return {which :"2"} }
+        }
+      )
+    </script> 
+###表单控件select
+
+仅仅单选的情况下，v-model指向的数据为单项数据：
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <div id="app">
+        <select v-model="which" >
+          <option which>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+        <span>which: {{ which }}</span>
+    </div>
+    <script>
+      var a= new Vue({
+          el: '#app',
+          data(){return {which :"2"} }
+        }
+      )
+    </script> 
+
+多选情况下，同样的控件，外观会有变化，并且v-model对应的是一个数组：
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <div id="app">
+        <select v-model="which" multiple>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+        <span>which: {{ which }}</span>
+    </div>
+    <script>
+      var a= new Vue({
+          el: '#app',
+          data(){return {which :["2","3"] } } 
+        }
+      )
+    </script> 
+
+##元素绑定
+
+不但可以做属性绑定，元素可以绑定的。比如根据表达式条件的不同来绑定不同的元素，或者循环绑定元素。
+
+###v-if
+
+指令v-if可以完成条件化的元素绑定。比如：
+
+    <h1 v-if="false">h1</h1>
+    <h2 v-else>h2</h2>
+
+当然，如果不必要，v-else是可以不写的：
+
+    <h1 v-if="true">h1</h1>
+
+如果需要条件化绑定的是一组元素，可以使用<template>来打包分组：
+
+      <template v-if="true">
+         <h1>h1</h1>
+         <p>big title</p>
+      </template>
+      <template v-else>
+         <h1>h2</h1>
+         <p>second title</p>
+      </template>
+
+有一个叫做v-show的指令，类似v-if的指令，即使表达式是假值，元素依然会绑定到DOM中，只是并不显示：
+
+  <h1 v-show="false">h1</h1>
+
+因此，严格来说，它并不是一个元素绑定指令。
+
+###v-for
+
+指令v-for基于一个数组渲染一组元素。这个指令的表达式使用特殊的语法，形式为 
+
+1. item in items。
+2. 或者 (item, index) in items;如果你需要循环索引的话
+
+就像这样：
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <div id="app"><ul>
+        <li v-for="(item, index)in items">{{ item }}，{{ index }}</li>
+    </ul></div>
+    <script>
+      var a= new Vue({
+          el: '#app',
+          data(){return {items :[1,2,3]} } 
+        }
+      )
+    </script> 
+
+输出：
+
+    1，0
+    2，1
+    3，2
+其中的in可以换成of，不影响功能，但是更加符合js迭代器语法。
+
+指令v-for也可以对对象迭代，每个迭代项目就是一种一个属性+值的对：
+
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <div id="app"><ul>
+        <li v-for="(v,k) in person">{{ k }}:{{ v }}</li>
+    </ul></div>
+    <script>
+      var a= new Vue({
+          el: '#app',
+          data(){return {
+            person :{
+              name:'frodo',
+              group:'ring fellow'
+            } 
+          } 
+        }}
+      )
+    </script> 
+
+指令v-for也可以对整数迭代，等于循环整数次：
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <div id="app"><ul>
+        <li v-for="v in 3">{{ v }}</li>
+    </ul></div>
+    <script>
+      var a= new Vue({
+          el: '#app'
+        }
+      )
+    </script> 
