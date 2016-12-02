@@ -1,6 +1,54 @@
 #vue.js开发脚手架
 
-稍微像样一点的vuejs的开发过程几乎总是搭配webpack、babel一起的，喜欢从头hack的人，我告诉你配置是极为繁琐的，幸好vue.js 提供了一个工具，叫做vue-cli 。可用于快速搭建单页应用起步代码。只需一分钟即可启动常用的开发特性：
+稍微像样一点的vuejs的开发过程几乎总是需要使用single-file components(单文件组件)的。因为它可以把HTML，CSS，JavaScript放到一起，以一个组件形式出现。这个概念本身并不新鲜，因为确实有一个叫做Web Component的技术标准在做这事儿，但是Vue把它平易近人的做成了现实。
+
+
+单文件组件是一个扩展名为vue的文件，其内可以分为三个部分，形如：
+
+
+      <template>
+        <div class="hello">
+          <h1>{{ msg }}</h1>
+        </div>
+      </template>
+    
+    
+      <script>
+      export default {
+        data () {
+          return {
+            msg: 'Hello World!'
+          }
+        }
+      }
+      </script>
+    
+    
+      <style scoped>
+      h1 {
+        color: #42b983;
+      }
+      </style>
+
+文件内分为三个部分，`<template>`标签包围内的是html代码；  `<script>`内包围的是js代码，并且可以使用ES6的语法。 `<style>`内的则是css代码。使用这个组件的代码在app.vue内。只要首先在脚本内声明标签
+
+    import Hello from './components/Hello'
+    export default {
+      components: {
+        Hello
+      }
+    }
+
+随后在html内使用标签即可：
+
+  <hello></hello>
+
+非常大的一个亮点！一个vue文件，内部js、css、html就都齐了，可以作为一个完整的、自包含的组件了。非常有趣的、我个人极为欣赏的web components就在此处了。
+
+vue文件内的语法，当然不是浏览器所可以支持的，浏览器不认识它！魔术在于webpack+vue-loader+babel 。webpack加载vue文件首先调用vue-loader，vue-loader会调用babel转换ES6代码为ES5代码，把css和html作为模块也转换为客户端js代码。这些js代码浏览器就可以识别了。
+
+
+搭配webpack、babel一起的，喜欢从头hack的人，我告诉你配置是极为繁琐的，幸好vue.js 提供了一个工具，叫做vue-cli 。可用于快速搭建单页应用起步代码。只需一分钟即可启动常用的开发特性：
 
 1. 可用的脚手架代码。
 2. 热重载。组件代码更新后自动重新加载
@@ -74,51 +122,9 @@ vue文件是三位一体的。就是说css、html、js都在一个文件内，�
 
 ## 查看vue
 
-起步代码中有一个组件代码，在src/hello.vue内。查看：
-
-     <template>
-        <div class="hello">
-          <h1>{{ msg }}</h1>
-        </div>
-      </template>
-    
-    
-      <script>
-      export default {
-        data () {
-          return {
-            msg: 'Hello World!'
-          }
-        }
-      }
-      </script>
-    
-    
-      <style scoped>
-      h1 {
-        color: #42b983;
-      }
-      </style>
-
-文件内分为三个部分， <template>标签包围内的是html代码；  <script>内包围的是js代码，并且可以使用ES6的语法。  <style>内的则是css代码。使用这个组件的代码在app.vue内。只要首先在脚本内声明标签
-
-    import Hello from './components/Hello'
-    export default {
-      components: {
-        Hello
-      }
-    }
-
-随后在html内使用标签即可：
-
-  <hello></hello>
-
-非常大的一个亮点！一个vue文件，内部js、css、html就都齐了，可以作为一个完整的、自包含的组件了。非常有趣的、我个人极为欣赏的web components就在此处了。
-
-vue文件内的语法，当然不是浏览器所可以支持的，浏览器不认识它！魔术在于webpack+vue-loader+babel 。webpack加载vue文件首先调用vue-loader，vue-loader会调用babel转换ES6代码为ES5代码，把css和html作为模块也转换为客户端js代码。这些js代码浏览器就可以识别了。
+起步代码中有一个组件代码，在src/hello.vue内。正如我们一开始提到的代码。
 
 另外，我们看看热加载。把hello组件的msg值改改。然后保存。浏览器会自动刷新的。这就是热加载了。对于频繁修改调试的程序员，有了热加载，得轻松不少。
-
 
 ## 安装chrome开发工具
 
@@ -140,14 +146,5 @@ vue文件内的语法，当然不是浏览器所可以支持的，浏览器不�
     http-server
 
 然后，到http://localhost:8080查看效果。和运行`npm run dev`看到的一模一样。
-
-# 更多
-vue还有两个插件，对开发者很有价值
-## 加强版 ，访问服务器 
-    npm install vue-resource --save
-## 安装路由
-    npm install vue-router --save
-
-## 细节展开
 
 我们走马观花的看了webpack、vue-loader、babel 、vue组件，未来需要一些篇幅去详细说明它们。
