@@ -1,0 +1,22 @@
+
+    <div id="app">
+    <p><span id="count">0</span>
+        <button id="inc">+</button>
+        <button id="dec">-</button>
+      </p>
+    </div>
+    <script>
+        var counter = document.getElementById('count');
+        var btn1 = document.getElementById('inc');
+        var btn2 = document.getElementById('dec');
+        var count = 0;
+        btn1.addEventListener('click',function (){
+                    counter.innerHTML = ++count;
+                }
+        )
+        btn2.addEventListener('click',function (){
+                    counter.innerHTML = --count;
+                }
+        )
+    </script>
+    
