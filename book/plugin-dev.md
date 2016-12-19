@@ -65,6 +65,6 @@
 打开控制台，可以看到如下消息：
 
     Plugin activiated
-    p1.js:2 Hello  Vue Instance
-    p1.js:2 Hello  Global Vue
+    Hello  Vue Instance
+    Hello  Global Vue
     
