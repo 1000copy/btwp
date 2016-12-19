@@ -26,9 +26,7 @@
 希望热加载的代码就是这样了。目录结构如下：
     
     ├── output
-    │   ├── bundle.js
     │   └── index.html
-    ├── package.json
     ├── server.js
     └── src
         ├── a.js
