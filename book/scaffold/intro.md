@@ -55,15 +55,15 @@ vue文件内的语法，当然不是浏览器所可以支持的，浏览器不�
 3. 静态代码检查。
 4. ES6语言特性
 
-# 工具准备
+## 工具准备
 
 我们需要使用vue-cli来创建一个脚手架项目。
 
-## 安装 vue-cli
+### 安装 vue-cli
 
     $ npm install -g vue-cli
 
-## 确认node版本
+### 确认node版本
 
 我的版本是
 
@@ -74,7 +74,7 @@ vue文件内的语法，当然不是浏览器所可以支持的，浏览器不�
 
 很多问题如果出现，可能和版本有关，建议和我一致 。
 
-# 创建新项目
+## 创建新项目
 
 执行：
        $ vue init webpack my-project
@@ -98,7 +98,7 @@ vue文件内的语法，当然不是浏览器所可以支持的，浏览器不�
 
 理论上webpack和browserify的功能类似，都可以做打包工具。但是webpack就是那个文档特少，但是大家都争着使用的热门工具。所以，我们就不管那么多，先使用webpack啦。
 
-# 安装依赖，走你
+#### 安装依赖，走你
 
     $ cd my-project
     $ npm install
@@ -106,11 +106,11 @@ vue文件内的语法，当然不是浏览器所可以支持的，浏览器不�
 
 到http://localhost:8080查看效果。
 
-# 查看vue文件
+#### 查看vue文件
 
 vue文件是三位一体的。就是说css、html、js都在一个文件内，使用标签做出分割。为了更好的查看结构，建议首先安装对应编辑器的高光插件。
 
-## 安装语法高光
+### 安装语法高光
 
 我习惯使用的编辑器是sublime text，安装插件就可以识别所有扩展名为.vue的vuejs组件代码，给予高光显示，便于代码的阅读和编写。这个插件叫做 vue-syntax-highlight，是vuejs官方提供的。它位于github.com。只要把它克隆到你的Sublime包目录内。在我的电脑上，Sublime包目录是/Users/lcj/Library/Application\ Support/Sublime\ Text\ 3/Packages ，所以安装的过程就是
 
@@ -120,18 +120,18 @@ vue文件是三位一体的。就是说css、html、js都在一个文件内，�
 
 然后重新启动即可。之后阅读代码，所有的扩展名为.vue文件都会有相应的高光显示。
 
-## 查看vue
+### 查看vue
 
 起步代码中有一个组件代码，在src/hello.vue内。正如我们一开始提到的代码。
 
 另外，我们看看热加载。把hello组件的msg值改改。然后保存。浏览器会自动刷新的。这就是热加载了。对于频繁修改调试的程序员，有了热加载，得轻松不少。
 
-## 安装chrome开发工具
+### 安装chrome开发工具
 
 
 我习惯使用的浏览器是chrome，可以安装vue的开发工具到chrome插件内。在chrome市场内查询vue-developertools 。有了它，可以在chrome console内看到更加友好的vue错误提示。
 
-# 回归日常
+### 回归日常
 
 我们所有的编辑修改一旦完成需要更新网站时，最终需要把所有的vue，ES6代码等编译出来到ES5的js文件。现在可以构建这些webpack代码：
 

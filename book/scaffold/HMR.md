@@ -1,4 +1,6 @@
-使用webpack有一段时间了，其中的模块热加载加快了开发的速度。它无需刷新，只要修改了文件，客户端就立刻立刻做热加载。如何做到？当然理解他的最好的做法就是我们自己做做一遍。
+##热加载
+
+使用webpack的模块热加载可以加快开发的速度。它无需刷新，只要修改了文件，客户端就立刻立刻做热加载。如何做到？当然理解它的最好的做法就是我们自己做一遍。
 
 本文关心的是：
 
@@ -41,13 +43,14 @@
     mkdir output
     touch output/index.html
     touch server.js
-##创建环境
+
+####创建环境
 
     npm init -y
     npm install express --save
     npm install webpack webpack-dev-middleware webpack-hot-middleware --save-dev
     
-## 创建服务器文件
+#### 创建服务器文件
 
 此服务器文件使用express创建服务器监听，使用dev中间件，HMR中间件：
 

@@ -2,8 +2,11 @@ pandoc -o b.epub \
 	--toc --toc-depth=3 \
 	perface.md \
 	firstchapter/1.intro.md \
-	firstchapter/computed-prop.md \
 	bindings/intro.md \
+	bindings/element.md \
+	bindings/array.md \
+	bindings/form.md \
+	firstchapter/computed-prop.md \
 	directives/intro.md \
 	directives/customdirective.md \
 	comp/intro.md \
@@ -18,7 +21,7 @@ pandoc -o b.epub \
 	scaffold/webpack/1.md \
 	scaffold/webpack/css.md \
 	scaffold/webpack/svg.md \
-	scaffold/reqimg.md \
+	scaffold/webpack/reqimg.md \
 	scaffold/api-server.md \
 	scaffold/HMR.md 
 
