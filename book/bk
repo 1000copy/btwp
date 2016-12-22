@@ -23,6 +23,9 @@ pandoc -o b.epub \
 	scaffold/webpack/svg.md \
 	scaffold/webpack/reqimg.md \
 	scaffold/api-server.md \
-	scaffold/HMR.md 
+	scaffold/HMR.md \
+	devtools/intro.md \
+	devtools/1.md \
+	devtools/2.md 
 
 	
