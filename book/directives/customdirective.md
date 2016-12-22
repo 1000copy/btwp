@@ -1,3 +1,5 @@
+##自定义指令
+
 指令允许当它的值改变时对元素应用任何DOM操作。比如我们做一个指令v-hidden，当值改变时，更新元素的style值，切换它的可见性。可以这样：
 
     <script src="https://unpkg.com/vue/dist/vue.js"></script>

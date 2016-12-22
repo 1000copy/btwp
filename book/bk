@@ -1,0 +1,27 @@
+pandoc -o b.epub \
+	--toc --toc-depth=2 \
+	perface.md \
+	firstchapter/1.intro.md \
+	firstchapter/computed-prop.md \
+	bindings/intro.md \
+	directives/intro.md \
+	directives/customdirective.md \
+	comp/components.md \
+	comp/comm.md \
+	comp/comp-styles.md \
+	comp/slot.md \
+	comp/vue-component-comm.md \
+	comp/renderfunction.md \
+	plugin-dev.md \
+	router/vue-router.md \
+	http/vue-resource.md \
+	vuex/intro.md \
+	scaffold/intro.md \
+	scaffold/webpack/1.md \
+	scaffold/webpack/css.md \
+	scaffold/webpack/svg.md \
+	scaffold/reqimg.md \
+	scaffold/api-server.md \
+	scaffold/HMR.md 
+
+	

@@ -1,4 +1,4 @@
-#vue.js开发脚手架
+#脚手架
 
 稍微像样一点的vuejs的开发过程几乎总是需要使用single-file components(单文件组件)的。因为它可以把HTML，CSS，JavaScript放到一起，以一个组件形式出现。这个概念本身并不新鲜，因为确实有一个叫做Web Component的技术标准在做这事儿，但是Vue把它平易近人的做成了现实。
 

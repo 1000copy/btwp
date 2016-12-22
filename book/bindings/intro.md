@@ -1,3 +1,5 @@
+#绑定
+
 vue拥有了绑定，从而和以往的native js，jquery有了重要的区别。这意味着，我可以从命令式编程走向声明式编程的跨越。以设置DOM数据为例，使用命令式的做法：
 
 1. 找到DOM项目
@@ -69,7 +71,7 @@ Mustache内使用表达式有时候带来方便，有时候，特别是表达式
 
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <div id="app">
-      <input v-bind:value="finalvalue"></input>
+      <input v-bind:value="finalvalue">
     </div>
 
     <script>
@@ -115,18 +117,18 @@ Mustache内使用表达式有时候带来方便，有时候，特别是表达式
 
 插入值绑定是无法处理HTML元素的属性的，因此你无法通过：
 
-    <input value="{{value}}"></input>
+    <input value="{{value}}">
 
 达到你的预期目的。想要绑定到属性，就得使用指令v-bind，而不是插入值绑定:
 
-    <input v-bind:value="value"></input>
+    <input v-bind:value="value">
 
 作为对比，案例如下：
 
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <div id="app">
-      <input v-bind:value="value"></input>
-      <input value="{{value}}"></input>
+      <input v-bind:value="value">
+      <input value="{{value}}">
     </div>
 
   <script>
@@ -146,26 +148,26 @@ Mustache内使用表达式有时候带来方便，有时候，特别是表达式
 
 v-bind针对class可以直接传入一个对象作为属性的值，比如：
 
-  <div v-bind:class="{ active: isActive, 'text-danger': hasError }"></div>
+    <div v-bind:class="{ active: isActive, 'text-danger': hasError }"></div>
 
 如果isActive为true，那么active作为字符串拼接结果的一部分；如果hasError为true，则text-danger为字符串拼接结果的一部分。因此：
 
-  data: {
-    isActive: true,
-    hasError: false
-  }
+    data: {
+      isActive: true,
+      hasError: false
+    }
 
 得到的渲染结果为：
 
-  <div class="active"></div>
+    <div class="active"></div>
 
 v-bind针对class可以直接传入一个数组作为属性的值：
 
-  <div v-bind:class="[active,text-danger]"></div>
+    <div v-bind:class="[active,text-danger]"></div>
 
 得到的渲染结果为：
 
-  <div class="active text-danger"></div>
+    <div class="active text-danger"></div>
 
 你可以继续使用一般属性的绑定方法，但是使用新方法可以在代码中避免字符串拼接这样恼人的情况。
 
@@ -173,44 +175,44 @@ v-bind针对class可以直接传入一个数组作为属性的值：
 
 也可以如针对class那样，传入对象或者数组，对象就是一个style对象，数组这是多个style对象。我们看案例：
 
-  <div v-bind:style="styleObject"></div>
+    <div v-bind:style="styleObject"></div>
 
-  data: {
-    styleObject: {
-      color: 'red',
-      fontSize: '13px'
+    data: {
+      styleObject: {
+        color: 'red',
+        fontSize: '13px'
+      }
     }
-  }
 
 渲染出来的结果为：
 
-  <div style="color:red;fontSize:13px; ">abc</div>
+    <div style="color:red;fontSize:13px; ">abc</div>
 
 完整演示对象和数组的代码为：
 
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
-  <div id="app">
-    <div style="color:red;fontSize:13px; ">abc</div>
-    <div v-bind:style="[s1,s2]">abc</div>
-    <div v-bind:style="styleObject">abc</div>
-  </div>
-  <script>
-    var a= new Vue({
-      el: '#app',
-       data: {
-        styleObject: {
-          color: 'red',
-          fontSize: '13px'
-        },
-        s1: {
-          color: 'red',
-        },
-        s2: {
-          fontSize: '13px'
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <div id="app">
+      <div style="color:red;fontSize:13px; ">abc</div>
+      <div v-bind:style="[s1,s2]">abc</div>
+      <div v-bind:style="styleObject">abc</div>
+    </div>
+    <script>
+      var a= new Vue({
+        el: '#app',
+         data: {
+          styleObject: {
+            color: 'red',
+            fontSize: '13px'
+          },
+          s1: {
+            color: 'red',
+          },
+          s2: {
+            fontSize: '13px'
+          }
         }
-      }
-    })
-  </script> 
+      })
+    </script> 
 
 ##事件绑定
 
@@ -235,30 +237,30 @@ v-bind针对class可以直接传入一个数组作为属性的值：
 
 指令v-on可以使用修饰符。可以选这些修饰符
 
-  .stop
-  .prevent
-  .capture
-  .self
+    .stop
+    .prevent
+    .capture
+    .self
 
 还有一类特别的修饰符，专门用于键盘事件，类似
 
-  .keyup.enter
+    .keyup.enter
 
 表示侦听enter键的keyup事件。还有更多：
 
-  .enter
-  .tab
-  .delete
-  .esc
-  .space
-  .up
-  .down
-  .left
-  .right
+    .enter
+    .tab
+    .delete
+    .esc
+    .space
+    .up
+    .down
+    .left
+    .right
 
 也可以在keyup修饰符后跟着一个数字表示键盘的ASCII码：
 
-  .13 等同于.enter
+    .13 等同于.enter
 
 
 ###应用：绑定表单控件
@@ -267,7 +269,7 @@ v-bind针对class可以直接传入一个数组作为属性的值：
 
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <div id="app">
-      <input type="checkbox" v-bind:checked="checked">v-bind</input><br/>
+      <input type="checkbox" v-bind:checked="checked">v-bind<br><br/>
       <label>{{ checked }}</label>
     </div>
     <script>
@@ -291,7 +293,7 @@ v-bind针对class可以直接传入一个数组作为属性的值：
 
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <div id="app">
-      <input type="checkbox" ref="c2"v-bind:checked="checked" @change="change">v-bind</input><br/>
+      <label><input type="checkbox" ref="c2"v-bind:checked="checked" @change="change">v-bind</label><br/>
     <label for="checkbox">{{ checked }}</label>
     </div>
     <script>
@@ -315,7 +317,7 @@ v-bind针对class可以直接传入一个数组作为属性的值：
 
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <div id="app">
-      <input type="checkbox" v-model="checked">v-model</input><br/>
+      <label><input type="checkbox" v-model="checked">v-model</label><br/>
       <label for="checkbox">{{ checked }}</label>
     </div>
     <script>
@@ -332,22 +334,22 @@ v-bind针对class可以直接传入一个数组作为属性的值：
 ####表单控件：text
 
 
-  <input type="text" v-model="message">
+    <input type="text" v-model="message">
 
 
 ####表单控件：checkbox
 
 在单个checkbox的情况下：
 
-  <input type="checkbox" v-model="checked">
+    <input type="checkbox" v-model="checked">
 
 此checkbox会和数据项checked形成双向绑定。
 
 在多个checkbox的情况下：
 
-  <input type="checkbox" value="1" v-model="checks">
-  <input type="checkbox" value="2" v-model="checks">
-  <input type="checkbox" value="3" v-model="checks">
+    <input type="checkbox" value="1" v-model="checks">
+    <input type="checkbox" value="2" v-model="checks">
+    <input type="checkbox" value="3" v-model="checks">
 
 会和checks形成双向绑定。checks是一个数组，案例：
 
@@ -441,7 +443,7 @@ v-bind针对class可以直接传入一个数组作为属性的值：
 
     <h1 v-if="true">h1</h1>
 
-如果需要条件化绑定的是一组元素，可以使用<template>来打包分组：
+如果需要条件化绑定的是一组元素，可以使用`<template>`来打包分组：
 
       <template v-if="true">
          <h1>h1</h1>
