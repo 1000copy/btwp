@@ -1,17 +1,15 @@
 pandoc -o b.epub \
-	--toc --toc-depth=2 \
+	--toc --toc-depth=3 \
 	perface.md \
 	firstchapter/1.intro.md \
 	firstchapter/computed-prop.md \
 	bindings/intro.md \
 	directives/intro.md \
 	directives/customdirective.md \
-	comp/components.md \
+	comp/intro.md \
 	comp/comm.md \
-	comp/comp-styles.md \
+	comp/codestyle.md \
 	comp/slot.md \
-	comp/vue-component-comm.md \
-	comp/renderfunction.md \
 	plugin-dev.md \
 	router/vue-router.md \
 	http/vue-resource.md \

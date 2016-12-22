@@ -1,21 +1,23 @@
+##组件编码风格
 
-
-##组件
-
-在新的vue版本中组件被认为更好的复用代码和分离关注点的方式。接下来，我们使用同样的案例，讲解组件。我们可以看到HTML代码：
+Vue组件被认为更好的复用代码和分离关注点的方式。接下来，我们使用同样的案例，讲解组件。我们可以看到HTML代码：
 
     <div id="app">
         <span>{{count}}</span>
         <button @click="inc">+</button>
     </div>
 
-标签<span>和<button>其实一起合作，完成一个完整的功能，它们是内聚的；因此组件的基础概念，如果可以使用一个`自定义标签`，把它们两个包装到一个组件内会是一种更好的实践。以此观念，做完后应该得到这样的代码：
+标签`<span>`和`<button>`其实一起合作，完成一个完整的功能，它们是内聚的；因此组件的基础概念，如果可以使用一个`自定义标签`，把它们两个包装到一个组件内会是一种更好的实践。以此观念，做完后应该得到这样的代码：
 
     <div id="app">
         <counter></counter>
     </div>
  
-实际上开发起来并不困难，只是需要创建一个组件，把本来在Vue实例内的方法和数据，移动到此组件内，把在HTML内的两个标签也移动到组件的模板内。以下代码是可以直接保存为html文件，并使用浏览器来打开运行的：
+实际上开发起来并不困难，只是需要创建一个组件，把本来在Vue实例内的方法和数据，移动到此组件内，把在HTML内的两个标签也移动到组件的模板内。我从最简单的、使用template字符串的组件开始。
+
+###集中模板式
+
+以下代码是可以直接保存为html文件，并使用浏览器来打开运行的：
 
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <div id="app">
@@ -54,7 +56,7 @@
 1. 你得小心的在外层使用单引号，在内部使用双引号
 2. 混杂js和html观感不佳
 
-###模板分离的方式
+###分离模板式
 
 模板内的HTML，可以由多种方式从代码中分离出来，以便增加可读性。第一种方式采用x-template:
 
@@ -153,21 +155,9 @@
 
 模板是组件的一部分，它应该是和组件的其他定义内聚在一起。所以，应该尽量避免使用这两种模板方案，除非这是一个小应用或者演示程序代码。
 
-另外可以使用的替代方法：
-1. render函数。实际上所有的template字符串本来在内部就被编译为render函数的
-2. 单文件组件技术
-3. 或者vue支持的JSX。
+###函数式
 
-当然，后两种方法就需要转译器和打包工具的配合。比如Babel和webpack的。这些内容，请搜索参考
-
-1. vue.js - advance - render 函数小抄
-2. vue.js的起步
-
-暂时不在讨论之列。
-
-### Render函数式组件
-
-Render函数可以充分利用JavaScript语言在创建HTML模板方面的灵活性。实际上，组件的HTML模板最终都会转换为Render函数类型。我们在“vue.js - 高级 - render函数”中有提及它。对于同一的需求，使用Render函数的代码如下：
+Render函数可以充分利用JavaScript语言在创建HTML模板方面的灵活性。实际上，组件的HTML模板最终都会转换为Render函数类型。对于同一的需求，使用Render函数的代码如下：
 
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <div id="app">
@@ -216,4 +206,101 @@ Render函数可以充分利用JavaScript语言在创建HTML模板方面的灵活
     
     </script>
 
-函数render的参数h，其实是一个名为createElement 的函数，可以用来创建元素。此函数的具体说明，请参考官方手册即可。
+函数render的参数h，其实是一个名为createElement 的函数，可以用来创建元素。此函数的具体说明，请参考官方手册即可。为了方便，完整的使用createElement的实例代码抄写自vue.js手册。如下 ：
+
+    createElement(
+      // {String | Object | Function}
+      // An HTML tag name, component options, or function
+      // returning one of these. Required.
+      'div',
+      // {Object}
+      // A data object corresponding to the attributes
+      // you would use in a template. Optional.
+      {
+        // (see details in the next section below)
+      },
+      // {String | Array}
+      // Children VNodes. Optional.
+      [
+        createElement('h1', 'hello world'),
+        createElement(MyComponent, {
+          props: {
+            someProp: 'foo'
+          }
+        }),
+        'bar'
+      ]
+    )
+
+
+
+vue.js推荐使用的扩展名为vue的组件模板，可以让标签的属性和内容都变得动态，这是很强大也很已用的能力。但是，如果我需要标签名本身都是可以动态的话，怎么办？
+
+比如我希望提供一个标签，可以根据属性值动态选择head的层级，像是把
+
+    <h1>header1</h1>
+    <h2>header2</h2>  
+    
+可以替代为：
+
+       <hdr :level="1">header1</hdr>
+       <hdr :level="2">header2</hdr>
+
+答案就是`render`函数。具体做法就是首先注册一个组件：
+
+    Vue.component('hdr', {
+      render: function (createElement) {
+        return createElement(
+          'h' + this.level,   // tag name
+          this.$slots.default // array of children
+        )
+      },
+      props: {
+        level: {
+          type: Number,
+          required: true
+        }
+      }
+    })
+    
+随后在html内使用此组件：
+    //javascript
+    new Vue({
+      el: '#example'
+    })
+    
+    // html
+    <div id="example">
+       <hdr :level="1">abc</hdr>
+       <hdr :level="2">abc</hdr>
+    </div>
+可以执行的代码在此：
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js">
+    </script>
+    <div id="example">
+       <hdr :level="1">abc</hdr>
+       <hdr :level="2">abc</hdr>
+    </div>
+    <script type="text/javascript"> Vue.component('hdr', {
+      render: function (createElement) {
+        console.log(this.level)
+        return createElement(
+          'h' + this.level,   
+          this.$slots.default 
+        )
+      },
+      props: {
+        level: {
+          type: Number,
+          required: true
+        }
+      }
+    })
+    new Vue({
+      el: '#example'
+    })
+    </script>
+
+    
+函数render会传入一个createElement函数作为参数，你可以使用此函数来创建标签。第一个参数就是标签名称，以及为创建的标签提供属性和内容，以及创建子标签。在render函数内，可以通过this.$slots访问slot，从而把slot内的元素插入到当前被创建的标签内。
