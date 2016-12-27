@@ -30,19 +30,19 @@
 
 我们现在提供一个api实现（api server），为默认的vue的欢迎页面消息做一个修改，服务器端来提供它：
 
-
+    
     var express = require('express');
     var app = express();
     app.get('/api', function (req, res) {
       var j = {msg:'Hello From Server'}
-      res.end(JSON.stringify(j);
+      res.end(JSON.stringify(j));
     })
     var server = app.listen(8181, function () {
       var host = server.address().address
       var port = server.address().port
       console.log("listening at http://%s:%s", host, port)
     })
-    
+        
 客户端(Hello.vue)需要安装vue-resource
 
       npm i vue-resource --save
@@ -74,6 +74,11 @@
     }
     </script>
 
+在src/main.js内使用vue-resource：
+
+    import r from 'Vue-Resource'
+    Vue.use(r)
+
 特别重要的点来了，已经要在config/index.js内添加代理转发，把本来发给dev-server.js的api rul转发给我们的api server。
  
     module.exports = {
@@ -88,7 +93,7 @@
     
 启动api server：
 
-      nodemon server.js
+      node server.js
 
 现在启动dev-server.js:
 
@@ -98,5 +103,24 @@
 
        Hello From Server
 
-bingo!
+这样，开发阶段我们已经做到了apiserver和dev-server.js的代码分离，并且继续利用本有的热加载能力。bingo!现在，我需要验证的是，如果我发布了此代码，是否可以api server代码中和api有关的代码无丝毫修改就可以继续复用。现在开始。
+
+首先，发布当前代码：
+
+    npm run build
+    
+命令会创建一个dist目录，内有编译打包好的全部js代码和资源代码。尽管其中有index.html，但是直接用浏览器打开是无效的。比如首先启动一个服务器，所有的资源文件必须通过浏览器发起，有服务器服务才可以正常运行。我们可以稍稍修改api server，引入插件，让此服务器除了提供api服务外，也可以对整个dist目录提供服务。只要添加代码：
+
+    var path = require('path')
+    var dist = path.join(__dirname, 'dist')
+    app.use('/',express.static(dist))
+
+然后启动服务：
+
+    node server.js 
+
+打开浏览器，访问http://localhost:8181,可以看到和dev-server.js下一样的结果。
+
+这说明，api server可以在发布后不做修改（修改时为了提供服务静态内容的能力，对于api提供者的代码是不做修改的）继续使用。    
+
 
