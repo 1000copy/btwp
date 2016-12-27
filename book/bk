@@ -6,7 +6,6 @@ pandoc -o b.epub \
 	bindings/element.md \
 	bindings/array.md \
 	bindings/form.md \
-	firstchapter/computed-prop.md \
 	directives/intro.md \
 	directives/customdirective.md \
 	comp/intro.md \
