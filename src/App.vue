@@ -1,13 +1,11 @@
 <template>
     <container id="app">
-<!--     <anchored-heading :level="1">hello2</anchored-heading>
-    <anchored-heading :level="2">hello</anchored-heading>
-    <anchored-heading :level="3">hello</anchored-heading> -->
       <row>
         <column type="md-12">
            <navbar>
               <navbar-part type="logo" href="#logo">
                 <h1>BootView docs</h1>
+               
               </navbar-part>
             </navbar>
         </column>
@@ -32,13 +30,13 @@ import navbarPart from './components/nav/navbar-part'
 import container from './components/layout/container'
 import row from './components/layout/row'
 import column from './components/layout/column'
-
+import aaa from './components/a'
 export default {
   components: {   
     anchoredHeading,
     dir,
     navbar,navbarPart,
-    container,row,column
+    container,row,column,aaa
   }
 }
 </script>

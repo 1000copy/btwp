@@ -1,7 +1,7 @@
 <template>
 <div>
   <panel type="info">
-    <part type="header">基础类</part>
+    <part type="header">基础类 <aaa></aaa></part>
     <part type="body">
        <list type="group">
          <lp context="vested"><router-link to="/ul">ul</router-link></lp>
@@ -35,7 +35,7 @@
 
 <script>
 
-import {panel,part,list,lp} from '../components'
+import {panel,part,list,lp,aaa} from '../components'
 
 export default {
   components: {       
