@@ -5,69 +5,98 @@
 1. Single-file components(单文件组件)。因为它可以把HTML，CSS，JavaScript放到一起，以一个组件形式出现
 2. 可以使用你喜爱的脚本。ES6、Coffee等，都可以通过脚手架提供的代码把它们翻译成浏览器可以识别的格式
 
-单文件组件是一个扩展名为vue的文件，其内可以分为三个部分，形如：
+然后，随即带来的就是急剧增长的复杂性：
+
+1. 需要模块打包工具。本书使用webpack
+2. 需要学习ES6。单文件组件内默认的js代码需要使用的是ES6的类
+3. 需要学习node、npm方面的知识
+
+##单文件组件
+
+我们依然采用案例说明问题。以往我们曾经创建过这样的组件：
+
+1. 一个span，红色，初始值为0
+2. 一个按钮
+2. 点击按钮，span内数字加1
+
+过往的程序是这样的：
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <div id="app">
+      <counter></counter>
+    </div>
+    <script>
+      var counter = {
+        'template':'<div><span>{{count}}</span><button v-on:click="inc">+</button></div>',
+        data () {
+          return {count: 0}
+        },
+        methods: {
+          inc () {this.count++}
+        }
+      }
+
+      var app = new Vue({
+        components:{
+          counter : counter
+        }}
+                       )
+      app.$mount('#app')
+    </script>
+    <style>
+      span{color:red}
+    </style>
+
+    如果使用一般的组件编写方法，类似完成一个红色的按钮文字点击后+1这样的组件，那么代码如下：
+
+如果是单文件组件，就可以把混合在HTML内的组件相关的标签、代码、css整体的搬移出来，放到一个单独的、扩展名为vue的文件，其内可以分为三个部分，形如：
 
 
       <template>
-        <div class="hello">
-          <h1>{{ msg }}</h1>
+        <div>
+          <span>{{count}}</span>
+          <button v-on:click="inc">+</button>
         </div>
       </template>
-    
-    
       <script>
       export default {
-        data () {
-          return {
-            msg: 'Hello World!'
+         data () {
+            return {count: 0}
+          },
+          methods: {
+            inc () {this.count++}
           }
-        }
       }
-      </script>
-    
-    
+      </script>  
       <style scoped>
-      h1 {
-        color: #42b983;
-      }
+        span{color:red}
       </style>
 
-文件内分为三个部分，`<template>`标签包围内的是html代码；  `<script>`内包围的是js代码，并且可以使用ES6的语法。 `<style>`内的则是css代码。使用这个组件的代码在app.vue内。只要首先在脚本内声明标签
+文件内分为三个部分，`<template>`标签包围内的是模板代码；  `<script>`内包围的是js代码，并且可以使用ES6的语法。 `<style>`内的则是css代码。
 
-    import Hello from './components/Hello'
-    export default {
-      components: {
-        Hello
-      }
-    }
+看起来真漂亮。一个vue文件，内部js、css、html就都齐了，可以作为一个完整的、自包含的组件了。
 
-随后在html内使用标签即可：
+然而，浏览器是无法识别这个看起来简单但是却不真实的组件的。因此Vue.js需要做打包，一个预处理工作，把这样组件转换成为浏览器可以识别的格式。其中包括：
 
-  <hello></hello>
+1. 创建一个vue-loader的工具，首先抽取vue文件的各个部分把它打包成js
+2. 工具babel把ES6语法的js转换为浏览器支持的ES6代码。
+3. 打包工具webpack组合两者的工作。
 
-非常大的一个亮点！一个vue文件，内部js、css、html就都齐了，可以作为一个完整的、自包含的组件了。非常有趣的、我个人极为欣赏的web components就在此处了。
+于是webpack首先调用vue-loader，vue-loader会调用babel转换ES6代码为ES5代码，并且把css和html作为模块也转换为客户端js代码。这些js代码浏览器就可以识别了。
 
-vue文件内的语法，当然不是浏览器所可以支持的，浏览器不认识它！魔术在于webpack+vue-loader+babel 。webpack加载vue文件首先调用vue-loader，vue-loader会调用babel转换ES6代码为ES5代码，把css和html作为模块也转换为客户端js代码。这些js代码浏览器就可以识别了。
+##vue-cli脚手架工具
 
-
-搭配webpack、babel一起的，喜欢从头hack的人，我告诉你配置是极为繁琐的，幸好vue.js 提供了一个工具，叫做vue-cli 。可用于快速搭建单页应用起步代码。只需一分钟即可启动常用的开发特性：
+把webpack、babel搭配起来需要很多配置，极为繁琐的。幸好vue.js 提供了一个工具，叫做vue-cli，它可用于快速搭建应用起步代码。只需一分钟即可启动常用的开发特性：
 
 1. 可用的脚手架代码。
 2. 热重载。组件代码更新后自动重新加载
 3. 静态代码检查。
 4. ES6语言特性
 
-## 工具准备
+我们就以此组件为例，介绍vue-cli的使用。
 
-我们需要使用vue-cli来创建一个脚手架项目。
 
-### 安装 vue-cli
-
-    $ npm install -g vue-cli
-
-### 确认node版本
-
-我的版本是
+确认好node版本的。我的版本是
 
     $ node -v
     v5.0.0
@@ -76,62 +105,68 @@ vue文件内的语法，当然不是浏览器所可以支持的，浏览器不�
 
 很多问题如果出现，可能和版本有关，建议和我一致 。
 
-## 创建新项目
+随后首先当然是安装vue-cli：
 
-执行：
-       $ vue init webpack my-project
+    $ npm install -g vue-cli
 
-第二个参数webpack，指明创建一个基于 "webpack" 模板的vuejs项目。此模板会创建一个webpack的脚手架代码。
 
-然而，webpack是啥？它本身是一个打包工具，可以把js、css、image打包成一个或者多个js文件，并且可以支持各种loader作为插件对不同类型的文件做转换处理。实际上webpack就是通过插件vue-loader在加载vue类型的文件时做格式转换，把vue类型文件翻译为浏览器可以识别的js文件。
+使用vue-cli创建新项目。执行：
 
-中国用户注意：vue init命令使用了npm， npm的仓库经常缓慢或者被阻断，可以使用国内镜像，只要编辑 ~/.npmrc 加入下面内容：
+    $ vue init webpack my-project
 
-    registry = https://registry.npm.taobao.org
-
-这个的做法可以快得多。
+第二个参数webpack，指明创建一个基于 "webpack" 模板的vuejs项目。此模板会创建一个webpack的脚手架代码。webpack是一个打包工具，可以把js、css、image打包成一个或者多个js文件，并且可以支持各种loader作为插件对不同类型的文件做转换处理。实际上webpack就是通过插件vue-loader在加载vue类型的文件时做格式转换，把vue类型文件翻译为浏览器可以识别的js文件。webpack的详细信息会单独介绍，这里你只要知道webpack是一个打包工具，有了它（或者类似的工具）单文件组件.vue才成为可能。
 
 当前可以使用的模板有：
 
-    webpack - 通过webpack和vue-loader插件，可以调用babel把.vue文件编译为客户端可以识别的js文件。默认还可以提供热加载、代码检查、测试。
-    webpack-simple - 最简单的webpack和vue-loader插件。
-    browserify - 通过Browserify + vueify 的组合，可以调用babel把.vue文件编译为客户端可以识别的js文件。默认还可以提供热加载、代码检查、测试。
-    browserify-simple - 最简单的Browserify + vueify 插件。
+1. webpack - 通过webpack和vue-loader插件，可以调用babel把.vue文件编译为客户端可以识别的js文件。默认还可以提供热加载、代码检查、测试。
+2. webpack-simple - 最简单的webpack和vue-loader插件。
+3. browserify - 通过Browserify + vueify 的组合，可以调用babel把.vue文件编译为客户端可以识别的js文件。默认还可以提供热加载、代码检查、测试。
+4. browserify-simple - 最简单的Browserify + vueify 插件。
 
-理论上webpack和browserify的功能类似，都可以做打包工具。但是webpack就是那个文档特少，但是大家都争着使用的热门工具。所以，我们就不管那么多，先使用webpack啦。
+理论上webpack和browserify的功能类似，都可以做打包工具。webpack功能强大并且非常的热门。所以，我们就先使用webpack。
 
-#### 安装依赖，走你
+然后，安装npm的惯例，首先把依赖安装起来：
 
     $ cd my-project
     $ npm install
     $ npm run dev
 
-到http://localhost:8080查看效果。
+完成后，此时服务器已经启动并监听到8080端口，现在使用浏览器访问http://localhost:8080，你可以看到vue-cli默认的界面。
 
-#### 查看vue文件
+##应用单文件组件
 
-vue文件是三位一体的。就是说css、html、js都在一个文件内，使用标签做出分割。为了更好的查看结构，建议首先安装对应编辑器的高光插件。
+使用编辑器打开src/components/Hello.vue文件，删除其内全部内容，代之以如下代码：
 
-### 安装语法高光
+    <template>
+      <div>
+        <span>{{count}}</span>
+        <button v-on:click="inc">+</button>
+      </div>
+    </template>
+    <script>
+    export default {
+       data () {
+          return {count: 0}
+        },
+        methods: {
+          inc () {this.count++}
+        }
+    }
+    </script>  
+    <style scoped>
+      span{color:red}
+    </style>
 
-我习惯使用的编辑器是sublime text，安装插件就可以识别所有扩展名为.vue的vuejs组件代码，给予高光显示，便于代码的阅读和编写。这个插件叫做 vue-syntax-highlight，是vuejs官方提供的。它位于github.com。只要把它克隆到你的Sublime包目录内。在我的电脑上，Sublime包目录是/Users/lcj/Library/Application\ Support/Sublime\ Text\ 3/Packages ，所以安装的过程就是
+在浏览器内应该可以看到如下界面：
+
+    [](scaffold/webpack/sfc.png)
 
 
-    cd /Users/lcj/Library/Application\ Support/Sublime\ Text\ 3/Packages 
-    git clone https://github.com/vuejs/vue-syntax-highlight
 
-然后重新启动即可。之后阅读代码，所有的扩展名为.vue文件都会有相应的高光显示。
+### 热加载测试
 
-### 查看vue
+我们之前提到了热加载，意思是如果代码被改动了，并不需要你去刷新浏览器，它会自动的更新最新的代码过来的。可以把组件的count默认值改改。然后保存。浏览器会自动刷新的。对于频繁修改调试的程序员，有了热加载，得轻松不少。
 
-起步代码中有一个组件代码，在src/hello.vue内。正如我们一开始提到的代码。
-
-另外，我们看看热加载。把hello组件的msg值改改。然后保存。浏览器会自动刷新的。这就是热加载了。对于频繁修改调试的程序员，有了热加载，得轻松不少。
-
-### 安装chrome开发工具
-
-
-我习惯使用的浏览器是chrome，可以安装vue的开发工具到chrome插件内。在chrome市场内查询vue-developertools 。有了它，可以在chrome console内看到更加友好的vue错误提示。
 
 ### 回归日常
 
@@ -149,4 +184,18 @@ vue文件是三位一体的。就是说css、html、js都在一个文件内，�
 
 然后，到http://localhost:8080查看效果。和运行`npm run dev`看到的一模一样。
 
-我们走马观花的看了webpack、vue-loader、babel 、vue组件，未来需要一些篇幅去详细说明它们。
+### 查看vue文件
+
+vue文件是三位一体的。就是说css、html、js都在一个文件内，这意味着一般的编辑器并不能对它进行语法高光显示。为了更好的查看结构，建议首先安装对应编辑器的高光插件，便于代码的阅读和编写。这个插件叫做vue-syntax-highlight，是vuejs官方提供的。它位于github.com。
+
+我习惯使用的编辑器是sublime text，这里以此编辑器为例。只要把仓库vue-syntax-highlight克隆到你的Sublime包目录内。在我的电脑上，Sublime包目录是
+
+  /Users/lcj/Library/Application\ Support/Sublime\ Text\ 3/Packages ，
+
+所以安装的过程就是：
+
+    cd /Users/lcj/Library/Application\ Support/Sublime\ Text\ 3/Packages 
+    git clone https://github.com/vuejs/vue-syntax-highlight
+
+然后重新启动sublime text即可。
+

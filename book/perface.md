@@ -2,135 +2,22 @@
 % 刘传君
 
 
-#前言 
+#前言
 
-对其他框架我是佩服，对Vue.js我则是爱。我就是一眼看上了Vue.js,于是用它做各种东西，反反复复多次。然后但我觉得有些融会贯通时，我又回头去思考这样的问题：让我感觉到的Vue.js的靓丽具体是什么？
+我是一个软件企业内的程序员，在研究部门。
 
-还是上案例对比说明。这次的案例，UI看起来是：
+说到Vue.js的初见，我常常会和我的另外一个经历联系到一起。那是2015年初冬，成都雾霾，数日不见阳光，我感受到了极度的不快乐。于是我驱车外行，从成都出发，经过雅安、荥经一路，然而天气都是一样。当我冲过泥巴山的隧道，突然间的猝不及防，我看到了洒满阳光的山坡和谷地，也感受到了我脸上的热度和亮度。那一刻，我快乐的想要飞。
 
-![](perface.png)
+2016年，我希望创建一个前后端一体的框架，来填补公司内的比较老旧的、基于PC网页的框架的不能胜任的移动开发领域。于是，我跳入了Node和前端的坑。我一路的经过了回调地狱，范式迁移，框架森林，颇有几次看到自己在复杂面前的无力感。然后我也过了我的JavaScript隧道，终于看到了Vue.js。那一刻，就好像我的走出雾霾拥抱阳光的感受。我爱Vue.js的几个亮点：
 
-这是由一个span、两个按钮构成的界面。点击按钮会让span加1或者减1。
+1. 绑定式语法，声明式编程
+2. 组件，尤其是单文件组件
+3. 优美的API设计，简短，几乎没有驼峰式长复合词
+4. 字段依赖关系的计算相当巧妙，从而无需脏检查即可完成渲染依赖分析
 
-##vanilla.js 
+这些亮点，在编码领域其实并不新颖，特别是前两点，在桌面程序开发中其实差不多就是标配。然而，在前端领域把它们巧妙的引入，并充分利用了JavaScript的字面量对象带来的优势，Vue.js做的相当不错。我和每个我见过的程序员谈到它，介绍它，也听到部分人使用Vue.js的过程中的欣喜，投入了对它的研究——写框架、写测试、看源代码，我写了很多研究笔记并发布到我的博客上。
 
-vanilla.js的意思是，不使用任何框架。我们使用vanilla.js实现的代码是这样的：
-
-    
-    <div id="app">
-    <p><span id="count">0</span>
-        <button id="inc">+</button>
-        <button id="dec">-</button>
-      </p>
-    </div>
-    <script>
-        var counter = document.getElementById('count');
-        var btn1 = document.getElementById('inc');
-        var btn2 = document.getElementById('dec');
-        var count = 0;
-        btn1.addEventListener('click',function (){
-                    counter.innerHTML = ++count;
-                }
-        )
-        btn2.addEventListener('click',function (){
-                    counter.innerHTML = --count;
-                }
-        )
-    </script>
-    
-    
-   
-代码行数倒是不算多，但是看起来的感受是:
-
-1. 使用了多个DOM API(getElementById,innerHTML)
-2. DOM API设计的复合词太长
-
-我偏爱简洁的代码，而使用DOM API就构成了一种代码的臭味，让我喜欢不起来。
-
-##jquery
-
-第二个出场的是jquery。我个人认为前端历史上来说，有几个标志性事件:
-
-1. 微软加入了XMLHttpRequest。从此Ajax技术一发而不可收
-2. jquery。简单的Selector，精简的API，令世人只有有jquery，不知道有Vanilla.js 
-3. Vue.js等相类似的框架。引入了数据绑定，以及组件技术到前端开发
-
-jquery当然是不错的技术。那么，使用它完成一样的代码，效果会如何呢？
-
-      <script
-      src="https://code.jquery.com/jquery-3.1.1.js"
-      integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
-      crossorigin="anonymous"></script>
-    <div id="app">
-    <p><span id="count">0</span>
-        <button id="inc">+</button> 
-        <button id="dec">-</button>
-      </p>
-    </div>
-    <script>
-    var count = 0 
-    $('#inc').click(function(){
-      $("#count").html(++count)
-    })
-    $('#dec').click(function(){
-      $("#count").html(--count)
-    })
-    </script>
-
-分析一下：
-
-1. jquery的选择器比起原生的更好，即使和querySelector相比也更简洁
-2. 使用精简的API替代Vanilla的。比如.html()比起.getElementById（）来说，是要看着舒服点的
-
-然而，内核基本不变：依然需要编码添加EventListener、依然是命令式的取值和修改值，依然需要懂得DOM的节点选择、事件监听、回调函数等。
-
-##Vue.js
-
-最后出场的是Vue.js，代码是这样的：
-
-    <script src="https://unpkg.com/vue/dist/Vue.js"></script>
-    <div id="app">
-      <p>{{count}}
-        <button @click="inc">+</button>
-        <button @click="dec">-</button>
-      </p>
-    </div>
-    <script>
-    new Vue({
-      el:'#app',
-      data () {
-        return {
-          count: 0
-        }
-      },
-      methods: {
-        inc () {
-          this.count++
-        },
-        dec () {
-          this.count--
-        }
-      }
-    })
-    </script>
-    
-第一感觉就是：
-
-1. 规整。数据（data）方法(methods)放置的工工整整，一目了然。它充分的利用js的字面量对象的语法
-2. 整个应用接口设计，基本上采用的都是极为简洁的词汇。一眼看过去，一个复合词也没有（比如getElementById就是4个词复合起来的）
-
-
-现在，你看到的好处是：
-
-1. 现在，你不需要挂接EventListener，使用@click语法自动绑定事件，使用{{}}自动绑定数据
-2. 你不需要DOM的一系列的知识就可以构造此程序；对初学者来说，这个门槛真是降低太多
-
-Vue.js的优美和简约，来源于声明式编程的理念。就是说我不需要通过一系列的函数调用来完成一件事儿，而是直接声明想要做到什么。具体说来：
-
-1. 程序员直接声明{{count}}，告诉Vue此处使用Vue实例中的data对象内的count属性来填充。而不是调用.getElementById,.textContent来设置。
-2. 程序员通过@click直接声明点击事件指向位置为Vue实例内对象methods对应的方法。而不是通过调用.addEventListener，传入回调函数的方式来实现事件监听
-
-整个Vue.js的应用接口设计的非常优美，但是能量巨大，做到这一点需要很多功力。这就是我佩服的设计哲学。把麻烦留给自己，让开发者感受简洁。
+不知不觉数月已过，我发现我写了很多笔记，也收到了一些评论和关注。我研究这个领域，并且决定最后成书，我发现它对我有用。现在我则推荐给你，希望对你也是一样的有用。
 
 #作者介绍
 
@@ -138,4 +25,3 @@ Vue.js的优美和简约，来源于声明式编程的理念。就是说我不�
 
 创建过产品，创过业。好读书，求甚解。
 可以通过1000copy#gmail.com联系到我
-

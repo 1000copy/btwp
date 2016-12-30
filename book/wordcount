@@ -1,6 +1,4 @@
-pandoc -o b.epub \
-	--toc --toc-depth=3 \
-	perface.md \
+wc -m perface.md \
 	firstchapter/1.intro.md \
 	bindings/intro.md \
 	bindings/element.md \
