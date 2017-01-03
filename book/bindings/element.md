@@ -42,7 +42,7 @@
 
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <div id="app"><ul>
-        <li v-for="(item, index)in items">{{ item }}，{{ index }}</li>
+        <li v-for="(item, index) in items">{{ item }}，{{ index }}</li>
     </ul></div>
     <script>
       var a= new Vue({

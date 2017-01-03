@@ -63,7 +63,7 @@ vue.js本身没有提供网络访问能力，但是可以通过插件完成。vu
 会监听对/users的GET请求，如果发现请求到来，就会调用回调函数，并在在req、res内传递Request对象和Response对象。我们在res对象内把users对象做一个字符串化，然后由res对象传递给客户端。
 
 
-客户端访问代码：
+客户端访问代码(文件名：public/index.html)：
 
     <script src="https://unpkg.com/vue@2.0.6/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
@@ -105,7 +105,7 @@ vue.js本身没有提供网络访问能力，但是可以通过插件完成。vu
 
 ### 完整的URL访问
 
-对于GET类的HTTP请求方法，这样做就OK了。另外几种请求方法，监听的做法是类似的。不同的地方，主要是客户端可能会传递json过来到服务器，比如POST方法，可以用来添加一个user，此时就需要客户端传递一个JSON对象过来，服务器则需要解析JSON对象。此时有一个库可以帮我们做这件事，它就是body-parser库。代码：
+另外几种请求方法，监听的做法和我们使用的针对GET类的HTTP请求方法是类似的。不同之处在于客户端可能会传递json过来到服务器，服务器则需要解析JSON对象。此时有一个库可以帮我们做这件事，它就是body-parser库。代码：
 
     var bodyParser = require('body-parser')
     app.use(bodyParser.json())
@@ -114,8 +114,9 @@ vue.js本身没有提供网络访问能力，但是可以通过插件完成。vu
 
    response.body 
 
-取得客户端发来的json对象了。
+取得客户端发来的json对象了。因此，安装body-parser是必要的:
 
+    npm install body-parser
 
 完整代码如下(index.js)：
 
@@ -176,7 +177,7 @@ vue.js本身没有提供网络访问能力，但是可以通过插件完成。vu
         
 完整代码如下：
     
-   <script src="https://unpkg.com/vue@2.0.6/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue@2.0.6/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
     
     <div id="app">

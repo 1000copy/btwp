@@ -196,7 +196,7 @@
 
 来引用子组件实例。除了在js代码内通过$on方法设置监听代码外，也可以使用指令v-on在HTML内达成类似效果：
 
-        <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <div id="app">
       {{ total }}
       <count v-on:inc='inc'></count>

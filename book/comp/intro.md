@@ -48,7 +48,7 @@ Vue.js引入的组件让分解单一HTML到独立组件成为可能。组件可�
 
     <component v-bind:is="current"></component>
 
-假设我们有三个组件home、posts、archives，我们可以设置一个定时器，没过2秒修改一次current，把三个组件的逐个切入到当前挂接点：
+假设我们有三个组件home、posts、archives，我们可以设置一个定时器，每隔2秒修改一次current，把三个组件的逐个切入到当前挂接点：
 
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <div id="app">
