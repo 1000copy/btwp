@@ -1,7 +1,7 @@
 
 ## 创建api-server
 
-使用vue提供的vue-cli工具建立脚手架后，我可以编写客户端router，component等代码，可以利用热加载等特性，却不必需要了解webpack等运行于后端的技术。
+使用vue提供的vue-cli工具建立脚手架后，我可以编写单页面组件等代码，可以利用热加载等帮助开发的特性，却不必需要了解webpack等运行于后端的技术。
 
 然而，当我需要创建后端的api，此问题终于浮出水面。我的服务端api代码应该放置于何处才可以：
 
@@ -43,11 +43,11 @@
       console.log("listening at http://%s:%s", host, port)
     })
         
-客户端(Hello.vue)需要安装vue-resource
+客户端需要安装vue-resource
 
       npm i vue-resource --save
 
-并发起GET请求：
+并在把src/components/Hello.vue替换为如下代码，以便实际发起GET请求：
 
     <template>
       <div class="hello">
@@ -74,7 +74,7 @@
     }
     </script>
 
-在src/main.js内使用vue-resource：
+在src/main.js内插入如下代码，以便引入vue-resource：
 
     import r from 'Vue-Resource'
     Vue.use(r)
@@ -93,19 +93,19 @@
     
 启动api server：
 
-      node server.js
+    node server.js
 
 现在启动dev-server.js:
 
-      npm run dev
+    npm run dev
 
 客户端看到：
 
-       Hello From Server
+    Hello From Server
 
-这样，开发阶段我们已经做到了apiserver和dev-server.js的代码分离，并且继续利用本有的热加载能力。bingo!现在，我需要验证的是，如果我发布了此代码，是否可以api server代码中和api有关的代码无丝毫修改就可以继续复用。现在开始。
+这样，开发阶段我们已经做到了apiserver和dev-server.js的代码分离，并且继续利用本有的热加载能力。bingo!现在，我需要验证的是，如果我发布了此代码，是否可以api server代码中和api有关的代码无丝毫修改就可以继续复用。
 
-首先，发布当前代码：
+现在开始。首先，发布当前代码：
 
     npm run build
     
@@ -121,6 +121,4 @@
 
 打开浏览器，访问http://localhost:8181,可以看到和dev-server.js下一样的结果。
 
-这说明，api server可以在发布后不做修改（修改时为了提供服务静态内容的能力，对于api提供者的代码是不做修改的）继续使用。    
-
-
+这说明，api server可以在发布后不做修改（修改时为了提供服务静态内容的能力，对于api提供者的代码是不做修改的）继续使用。

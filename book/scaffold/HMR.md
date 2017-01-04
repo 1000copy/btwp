@@ -4,8 +4,8 @@
 
 本文关心的是：
 
-1. dev-middleware内部
-2. HMR(webpack-hot-middleware）的利用
+1. dev-middleware的利用方法
+2. HMR(webpack-hot-middleware）的利用方法
 
 这次提供热加载的代码共两个文件（放置于src内），a依赖于b，并调用b的引出函数：
 
@@ -17,7 +17,10 @@
     exports.b = function b(){
         console.log("h")
     }
-首先我需要使用dev-middleware让使用require函数成为可能，其次我希望使用HMR，当b文件内修改时，可以自动热加载，而不是必须完整reload才可以。当然，按照webpack的管理，我们需要一个入口index.html，放置于output内:
+
+首先我需要使用dev-middleware让使用require函数成为可能，其次我希望使用HMR，当b文件内修改时，可以自动热加载，而不是必须完整reload才可以。
+
+现在开始。首先，按照webpack的管理，我们需要一个入口index.html，放置于output内:
 
     <html>
       <body>
@@ -90,7 +93,7 @@
 
     if (module.hot) {
       module.hot.accept();
-    }
+    }  
 也就是说a.js得修改为：
 
     // a.js 
