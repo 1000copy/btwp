@@ -181,9 +181,9 @@
 
 ### 查看vue文件
 
-vue文件是三位一体的。就是说css、html、js都在一个文件内，这意味着一般的编辑器并不能对它进行语法高光显示。为了更好的查看结构，建议首先安装对应编辑器的高光插件，便于代码的阅读和编写。这个插件叫做vue-syntax-highlight，是vuejs官方提供的。它位于github.com。
+vue文件是三位一体的。就是说css、html、js都在一个文件内，这意味着一般的编辑器并不能对它进行语法高光显示。为了便于代码的阅读和编写，给你熟悉的编辑器安装一个语法插件是必要的。这个插件叫做vue-syntax-highlight，是vuejs官方提供的。它位于github.com。
 
-我习惯使用的编辑器是sublime text，这里以此编辑器为例。只要把仓库vue-syntax-highlight克隆到你的Sublime包目录内。在我的电脑上，Sublime包目录是
+我习惯使用的编辑器是sublime text，这里以此编辑器为例来安装插件。只要把仓库vue-syntax-highlight克隆到我的Sublime包目录内。在我的电脑上此包目录是：
 
   /Users/lcj/Library/Application\ Support/Sublime\ Text\ 3/Packages ，
 
@@ -192,5 +192,5 @@ vue文件是三位一体的。就是说css、html、js都在一个文件内，�
     cd /Users/lcj/Library/Application\ Support/Sublime\ Text\ 3/Packages 
     git clone https://github.com/vuejs/vue-syntax-highlight
 
-然后重新启动sublime text即可。
+然后重新启动sublime text，之后再打开.vue的文件，就可以看到被语法高光的文件了。
 
