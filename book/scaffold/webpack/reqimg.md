@@ -1,41 +1,53 @@
 ##加载图片
 
-vue的脚手架代码生成后，引入图片分为两种情况：
+加载图片也可以使用模块方案，也就是require函数方式。假设我们有一个图片:
 
-第一种情况是在html内引入。图片默认放置到assets内。脚手架代码内的app.vue引入的template内：
+![](scaffold/webpack/100.png)
 
-    <img src="./assets/logo.png">
+现在会以一个案例来说明如何使用require函数把此图片打包。
 
-就是此情况。
 
-第二种情况，就是我这里主要展示的——使用代码引入。也就是require函数方式。此处会需要webpack打包。具体使用方法可以这样如下。
+代码(文件名为main.js）：
 
-首先创建环境，使用
+    var img1 = document.createElement("img");
+    img1.src = require("./small.png");
+    document.body.appendChild(img1);
 
-    vue init webpack testbed
-    cd testbed
-    npm install
+主要的HTML文件（文件名为index.html）：
 
-在src/components/hello.vue内贴入脚本代码：
+    <html>
+    <body>
+      <script type="text/javascript" src="bundle.js"></script>
+    </body>
+    </html>
 
-  export default {
-    name: 'hello',
-    mounted(){
-      var img = document.createElement('img');
-      img.src = require('../assets/logo.png');
-      document.getElementById("did").appendChild(img)
-    },
-    data () {
-      return {
-        msg: ''
+webpack配置文件（文件名为webpack.config.js）：
+
+    module.exports = {
+      entry: './main.js',
+      output: {
+        filename: 'bundle.js'
+      },
+      module: {
+        loaders:[
+          { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192' }
+        ]
       }
-    }
-  }
+    };
 
-然后验证：
+要想打包这个图片，webpack需要一个loader来转换png文件。承担此责任的就是url-loader。它的参数limit=8192指明如果图片大小小于8192的话，就直接使用Data URL，否则就是正常的URL。Data URL无需引入外部文件，而是把内容直接编码在src属性内，编码格式为base64。
 
-  npm run dev
+必须按照loader：
 
-此时你可以浏览器内看到vue的图标被显示了两次。
+    npm i url-loader --save-dev
 
-此处文档比较缺乏，所以是vue-cli用户常常容易误解或者难以适应的地方。
+现在，开始打包：
+
+    webpack
+
+随后打开文件index.html 。你可以看到浏览器内已经显示了此图片。说明打包成功。
+
+对于Data URL有些好奇的人，可以看看生成的bundle.js文件的最后几行，你可以了解到最后赋值给img.src属性的，是类似这样的数据：
+
+    "data:image/png;base64,iVBORw0....."
+

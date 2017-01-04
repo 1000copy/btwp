@@ -16,7 +16,7 @@ Vue.js本身专注于视图层，而一个完整的应用必然涉及到方方�
 
 ##创建插件
 
-创建一个插件是非常简单的事儿。本节构建一个可以执行的demo，验证插件对Vue的修改，代码如下(文件名p1.js)：
+创建一个插件是非常简单的事儿。本节构建一个可以执行的demo，验证插件对Vue的修改，代码如下(文件名定为p1.js)：
 
 
     var get = function(a){console.log('Hello  ' +a)}
@@ -46,6 +46,7 @@ Vue.js本身专注于视图层，而一个完整的应用必然涉及到方方�
 此插件以get函数形式提供服务，可以打印一个字符串。它必须公开一个对象，此对象有一个install的方法，此方法的参数为Vue，可以在此方法内通过赋值创建全局方法，像这样：
 
         Vue.who = get;
+        
 或者针对vue的prototype，通过defineProperties创建实例方法：
 
      Object.defineProperties(Vue.prototype, {
