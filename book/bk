@@ -14,6 +14,8 @@ pandoc -o b.epub \
 	scaffold/intro.md \
 	plugin/plugin-dev.md \
 	plugin/router/vue-router.md \
+	plugin/router/router-obj-ref.md \
+	plugin/router/router-hook-ref.md \
 	plugin/http/vue-resource.md \
 	plugin/vuex/intro.md \
 	devtools/intro.md \
