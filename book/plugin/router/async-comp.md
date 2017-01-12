@@ -150,7 +150,8 @@ Vue.js支持component定义为一个函数：`function (resolve) {}`，在函数
 
    require(['./components/about'], resolve)
 
-从而大大的简化了异步组件的开发。当然，代价是你需要使用脚手架代码。
+从而大大的简化了异步组件的开发。当然，代价是你需要使用脚手架代码。这个特殊的require语法告诉webpack自动将编译后的代码分割成不同的块，这些块将通过按需自动下载。
+
 
 
 
