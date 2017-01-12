@@ -16,6 +16,7 @@ pandoc -o b.epub \
 	plugin/router/vue-router.md \
 	plugin/router/router-obj-ref.md \
 	plugin/router/router-hook-ref.md \
+	plugin/router/async-comp.md \
 	plugin/http/vue-resource.md \
 	plugin/vuex/intro.md \
 	devtools/intro.md \
