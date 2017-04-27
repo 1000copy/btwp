@@ -47,7 +47,7 @@
 现在来看看，同样的demo app，使用vuex完成的代码的样子，再一次，如下代码不是代码片段，是可以贴入到你的html文件内，并且直接使用浏览器打开运行的。
 
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/vuex@next"></script>
+    <script src="https://unpkg.com/vuex"></script>
     <div id="app">
       <p>{{count}}
         <button @click="inc">+</button>
@@ -86,7 +86,7 @@
 
 我们先看到有哪些重要的变化：
 
-1. 新的代码添加了对vuex@next脚本的依赖。这是当然的，因为你需要使用vuex的技术，当然需要引用它
+1. 新的代码添加了对vuex脚本的依赖。这是当然的，因为你需要使用vuex的技术，当然需要引用它
 2. methods数组还是这两个方法，这和demo1是一样的；但是方法内的计算逻辑，不再是在函数内进行，而是提交给store对象！这是一个新的对象！
 3. count数据也不再是一个data函数返回的对象的属性；而是通过计算字段来返回，并且在计算字段内的代码也不是自己算的，而是转发给store对象。再一次store对象！
 
